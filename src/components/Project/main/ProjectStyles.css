@@ -1,0 +1,80 @@
+/* ############### Project Thumb section ############### */
+
+.project-create-button {
+  color: black;
+  cursor: pointer;
+  width: 150px;
+  height: 30px;
+  margin: 0 auto;
+  margin-bottom: 10px;
+  border: 1px solid black;
+  text-align: center;
+  border-radius: 10px;
+}
+
+.project-title {
+  text-align: center;
+  font: 30px bold;
+}
+
+.project-description {
+  text-align: center;
+  font: 25px;
+}
+
+.project-img {
+  margin: 10px auto;
+  width: 40%;
+  min-width: 200px;
+  aspect-ratio: 2 / 2;
+}
+
+.project-quest {
+  font: 20px bold;
+}
+
+.project-minting {
+  margin: 10px auto;
+  display: flex;
+  width: 180px;
+  height: 40px;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid black;
+  border-radius: 20px;
+  font: 16px bold;
+  cursor: pointer;
+}
+
+.quest-container {
+  margin: 10px auto;
+  border-radius: 10px;
+  border: 2px solid white;
+  width: 80%;
+  height: auto;
+  background-color: #bbb;
+}
+
+.quest-container:hover {
+  border: 2px solid pink;
+}
+
+.quest-success-btn {
+  margin-top: 10px;
+  margin-left: 20px;
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font: 20px bold;
+  color: white;
+  background-color: #aaa;
+  border-radius: 10px;
+  width: 200px;
+  height: 30px;
+}
+
+.quest-success-btn:hover {
+  cursor: pointer;
+  background-color: skyblue;
+}

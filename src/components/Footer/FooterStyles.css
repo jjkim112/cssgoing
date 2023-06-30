@@ -1,0 +1,65 @@
+/* ############### Footer Section ############### */
+
+.footer-wrapper {
+  background-color: #fff;
+  max-width: 1850px;
+  margin: auto;
+  padding: 30px 20px;
+}
+
+.footer-title {
+  font-size: 16px;
+  color: #757575;
+  margin-bottom: 20px;
+}
+
+@media (max-width: 740px) {
+  .footer-wrapper {
+    padding: 30px 20px;
+  }
+}
+
+@media (max-width: 500px) {
+  .footer-wrapper {
+    padding: 30px 15px;
+  }
+}
+
+.footer-row {
+  margin-top: 40px;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+}
+
+@media (max-width: 740px) {
+  .footer-row {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+}
+
+@media (max-width: 500px) {
+  .footer-row {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.footer-column {
+  display: flex;
+  flex-direction: column;
+}
+
+.footer-link {
+  color: #757575;
+  margin-bottom: 20px;
+  font-size: 13px;
+}
+.footer-link-title {
+  font-size: 18px;
+  color: black;
+  margin-bottom: 20px;
+}
+
+.footer-link:hover {
+  font-weight: bold;
+  color: black;
+}

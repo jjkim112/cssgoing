@@ -1,0 +1,79 @@
+/* ############### Header Section ############### */
+.header_inner {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.header-wrapper-home {
+  display: flex;
+  justify-content: space-between;
+  background-color: #fff;
+  padding: 20px 30px;
+  min-width: 1850px;
+
+
+}
+
+@media (max-width: 550px) {
+  .header-wrapper-home {
+    padding: 15px 20px;
+  }
+}
+
+.navbar-home {
+  color: black;
+
+  width: 100%;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+.logo {
+  height: 20px;
+  width: 72px;
+  margin-right: 10px;
+}
+
+.header-menu-item {
+  margin: 0px 10px;
+  padding: 5px 16px;
+  border-radius: 20px;
+  font: 16px 500 black;
+  cursor: pointer;
+}
+
+.header-menu-item:hover {
+  background-color: #eee;
+}
+
+@media (max-width: 549px) {
+  .header-menu-item {
+    visibility: hidden;
+  }
+}
+
+.connect-wallet-button {
+  color: black;
+  border: 1px solid black;
+  font-size: 14px;
+  border-radius: 20px;
+  padding: 5px 50px;
+  white-space: nowrap;
+  cursor: pointer;
+}
+
+@media (min-width: 550px) {
+  .connect-wallet-button::after {
+    content: "";
+  }
+}
+
+@media (max-width: 549px) {
+  .connect-wallet-button::after {
+    content: "";
+  }
+}
