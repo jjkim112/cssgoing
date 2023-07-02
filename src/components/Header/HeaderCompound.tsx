@@ -1,23 +1,23 @@
-'use client';
-import React, { FC, ReactNode } from 'react';
-import Link from 'next/link';
-import './HeaderStyles.css';
-import Image from 'next/image';
-import { ethereum } from '@/lib/web3.config';
-import { useContext } from 'react';
-import { AppContext } from '@/app/layout';
-import useSWR from 'swr';
+"use client";
+import React, { FC, ReactNode } from "react";
+import Link from "next/link";
+import "./HeaderStyles.css";
+import Image from "next/image";
+import { ethereum } from "@/lib/web3.config";
+import { useContext } from "react";
+import { AppContext } from "@/app/layout";
+import useSWR from "swr";
 interface HeaderProps {
   className?: string;
   children?: ReactNode;
 }
 
-const HeaderCompound: FC<HeaderProps> = () => {
+const HeaderCustom: FC<HeaderProps> = () => {
   const { account, setAccount } = useContext(AppContext);
   const onClickLogIn = async () => {
     try {
       const accounts = await ethereum?.request({
-        method: 'eth_requestAccounts',
+        method: "eth_requestAccounts",
         params: [],
       });
 
@@ -33,7 +33,7 @@ const HeaderCompound: FC<HeaderProps> = () => {
           <Link href="/">
             <Image
               className="logo"
-              src={`/images/misc/logo.png`}
+              src={`/images/logo.png`}
               width={100}
               height={50}
               alt=""
@@ -41,10 +41,13 @@ const HeaderCompound: FC<HeaderProps> = () => {
           </Link>
 
           <Link href="/project">
-            <div className="header-menu-item">Project </div>
+            <div className="header-menu-item">프로젝트</div>
           </Link>
           <Link href="/profile">
-            <div className="header-menu-item">Profile </div>
+            <div className="header-menu-item">프로필</div>
+          </Link>
+          <Link href="/valid-ticket">
+            <div className="header-menu-item">유효 티켓 확인</div>
           </Link>
         </nav>
         {account ? (
@@ -61,4 +64,4 @@ const HeaderCompound: FC<HeaderProps> = () => {
   );
 };
 
-export default HeaderCompound;
+export default HeaderCustom;

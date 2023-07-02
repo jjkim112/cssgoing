@@ -1,13 +1,14 @@
-import React from 'react';
-import './ProjectThumbStyles.css';
-import Link from 'next/link';
+import React from "react";
+import "./ProjectThumbStyles.css";
+import Link from "next/link";
+import { TicketType } from "../main/OneProjectPart";
 
 interface OneProjectThumbProps {
   id: number;
   contract: string;
   title: string;
   imgUrl: string;
-  qeustsNum: number;
+  tickets: TicketType[];
 }
 
 function OneProjectThumb({
@@ -15,13 +16,13 @@ function OneProjectThumb({
   contract,
   title,
   imgUrl,
-  qeustsNum,
+  tickets,
 }: OneProjectThumbProps) {
   return (
     <Link href={`/project/${id}`} className="thumb-card hover:cursor-pointer">
       <img className="thumb-card-img" src={imgUrl} alt="" />
       <div className="thumb-card-title">{title}</div>
-      <div className="thumb-card-quest">퀘스트 수 : {qeustsNum}</div>
+      <div className="text-black">티켓 수 : {tickets.length}</div>
     </Link>
   );
 }

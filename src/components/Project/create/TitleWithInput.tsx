@@ -1,9 +1,9 @@
-'use client';
-import React, { ChangeEvent, useState, FC } from 'react';
+"use client";
+import React, { ChangeEvent, useState, FC } from "react";
 
 interface TitleWithInputProps {
   title: string;
-  placeholder: string;
+  placeholder?: string;
   onInputChange: (value: string) => void;
 }
 
@@ -12,7 +12,7 @@ const TitleWithInput: FC<TitleWithInputProps> = ({
   placeholder,
   onInputChange,
 }) => {
-  const [inputValue, setInputValue] = useState('');
+  const [inputValue, setInputValue] = useState("");
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     const newValue = e.target.value;
@@ -22,12 +22,14 @@ const TitleWithInput: FC<TitleWithInputProps> = ({
 
   return (
     <div className="flex items-center">
-      <h1 className="mr-4">{title}</h1>
+      <h1 className="mr-4 text-[16px] font-semibold whitespace-nowrap">
+        {title}
+      </h1>
       <input
-        className="border-black border-2"
+        className="border-black border-[1px] rounded-lg w-full px-2 py-1 my-1 hover:cursor-pointer hover:border-red-300"
         type="text"
         value={inputValue}
-        placeholder={placeholder}
+        placeholder={placeholder ?? ""}
         onChange={handleChange}
       />
     </div>

@@ -5,16 +5,34 @@
     "title": "ITAM & Professor Jo x Alpaca Finance ITAM & Profes",
     "description": "Korea’s alpacas are magical - This is an exclusive event-based NFT, for attendees of the ITAM & Professor Jo x Alpaca AMA",
     "imgUrl": "https://cdn-2.galxe.com/galaxy/images/alpacafinace/ITAM_AMA.png?optimizer=image",
-    "quests": [
+    "tickets": [
       {
-        "questId": 1,
-        "questTitle": "func1",
-        "type": "event1 emit"
+        "id": 1,
+        "seat": "1A",
+        "price": "100",
+        "minCount": 10,
+        "saleRate": 10
       },
       {
-        "questId": 1,
-        "questTitle": "func1",
-        "type": "event1 emit"
+        "id": 3,
+        "seat": "2A",
+        "price": "100",
+        "minCount": 10,
+        "saleRate": 10
+      },
+      {
+        "id": 3,
+        "seat": "3A",
+        "price": "100",
+        "minCount": 10,
+        "saleRate": 10
+      },
+      {
+        "id": 4,
+        "seat": "4A",
+        "price": "100",
+        "minCount": 10,
+        "saleRate": 10
       }
     ]
   },
@@ -23,17 +41,35 @@
     "contract": "0x1003cd894482ccaa113948",
     "title": "bMXX Grazing Range - Gold Tier",
     "description": "Korea’s alpacas are magical - This is an exclusive event-based NFT, for attendees of the ITAM & Professor Jo x Alpaca AMA",
-    "imgUrl": "This is an exclusive NFT for users who participated in the bMXX Grazing Range Pool",
-    "quests": [
+    "imgUrl": "https://cdn-2.galxe.com/galaxy/images/alpacafinance/bMXXGrazingRange-GoldTier.png?optimizer=image",
+    "tickets": [
       {
-        "questId": 1,
-        "questTitle": "func1",
-        "type": "event1 emit"
+        "id": 1,
+        "seat": "1A",
+        "price": "100",
+        "minCount": 10,
+        "saleRate": 10
       },
       {
-        "questId": 1,
-        "questTitle": "func1",
-        "type": "event1 emit"
+        "id": 3,
+        "seat": "2A",
+        "price": "100",
+        "minCount": 10,
+        "saleRate": 10
+      },
+      {
+        "id": 3,
+        "seat": "3A",
+        "price": "100",
+        "minCount": 10,
+        "saleRate": 10
+      },
+      {
+        "id": 4,
+        "seat": "4A",
+        "price": "100",
+        "minCount": 10,
+        "saleRate": 10
       }
     ]
   },
@@ -43,16 +79,219 @@
     "title": "A Gathering of Alpacas - China",
     "description": "Exclusive to attendees of China’s local Alpaca Finance meetups",
     "imgUrl": "https://cdn-2.galxe.com/galaxy/images/alpacafinance/AGatheringofAlpacas-China.png?optimizer=image",
-    "quests": [
+    "tickets": [
       {
-        "questId": 1,
-        "questTitle": "func1",
-        "type": "event1 emit"
+        "id": 1,
+        "seat": "1A",
+        "price": "100",
+        "minCount": 10,
+        "saleRate": 10
       },
       {
-        "questId": 1,
-        "questTitle": "func1",
-        "type": "event1 emit"
+        "id": 3,
+        "seat": "2A",
+        "price": "100",
+        "minCount": 10,
+        "saleRate": 10
+      },
+      {
+        "id": 3,
+        "seat": "3A",
+        "price": "100",
+        "minCount": 10,
+        "saleRate": 10
+      },
+      {
+        "id": 4,
+        "seat": "4A",
+        "price": "100",
+        "minCount": 10,
+        "saleRate": 10
+      }
+    ]
+  },
+  {
+    "id": 4,
+    "contract": "0x1aa3cd894482ccaa113948",
+    "title": "Linea Voyage Quest - 'I'm a first class Linea citizen' Campaign",
+    "description": "Introducing “I’m a first class Linea Citizen” - our campaign to combat bots and prioritize genuine user engagement in the Linea Voyage Quest. Partnering with Gitcoin Passport, Galxe Passport and with Guild.xyz,we’re determined to create a fair and authentic community experience. We started this Voyage campaign to stress test the network preparing for mainnet launch. We don’t have issues with bots or sybils as they help us to reach our goal. But if bots starts to consume all resources on Linea and prevent real humans from being able to participate to the quest, then we have an issue.",
+    "imgUrl": "https://galxe.com/_nuxt/img/campaign-loyalty-program.abe705f.png",
+    "tickets": [
+      {
+        "id": 1,
+        "seat": "1A",
+        "price": "100",
+        "minCount": 10,
+        "saleRate": 10
+      },
+      {
+        "id": 3,
+        "seat": "2A",
+        "price": "100",
+        "minCount": 10,
+        "saleRate": 10
+      },
+      {
+        "id": 3,
+        "seat": "3A",
+        "price": "100",
+        "minCount": 10,
+        "saleRate": 10
+      },
+      {
+        "id": 4,
+        "seat": "4A",
+        "price": "100",
+        "minCount": 10,
+        "saleRate": 10
+      }
+    ]
+  },
+  {
+    "id": 5,
+    "contract": "0x2aa3cd894482ccaa113948",
+    "title": "Opside Pre-alpha Testnet Carnival",
+    "description": "Welcome to the exhilarating Opside Pre-alpha Testnet Carnival! This unparalleled event marks the beginning of a new era in the world of decentralized technology, as it showcases the innovative potential of the Opside network before its official launch. Brace yourself for a thrilling ride through a world of cutting-edge blockchain solutions, inventive gaming experiences, and unmatched community engagement.",
+    "imgUrl": "https://cdn.galxe.com/galaxy/opside/aaa17f58-7ab8-405e-906f-a46063d1e5c0.png",
+    "tickets": [
+      {
+        "id": 1,
+        "seat": "1A",
+        "price": "100",
+        "minCount": 10,
+        "saleRate": 10
+      },
+      {
+        "id": 3,
+        "seat": "2A",
+        "price": "100",
+        "minCount": 10,
+        "saleRate": 10
+      },
+      {
+        "id": 3,
+        "seat": "3A",
+        "price": "100",
+        "minCount": 10,
+        "saleRate": 10
+      },
+      {
+        "id": 4,
+        "seat": "4A",
+        "price": "100",
+        "minCount": 10,
+        "saleRate": 10
+      }
+    ]
+  },
+  {
+    "id": 6,
+    "contract": "0x2aa3cd894482ccaa113948",
+    "title": "Opside Pre-alpha Testnet Carnival",
+    "description": "Welcome to the exhilarating Opside Pre-alpha Testnet Carnival! This unparalleled event marks the beginning of a new era in the world of decentralized technology, as it showcases the innovative potential of the Opside network before its official launch. Brace yourself for a thrilling ride through a world of cutting-edge blockchain solutions, inventive gaming experiences, and unmatched community engagement.",
+    "imgUrl": "https://cdn.galxe.com/galaxy/opside/aaa17f58-7ab8-405e-906f-a46063d1e5c0.png",
+    "tickets": [
+      {
+        "id": 1,
+        "seat": "1A",
+        "price": "100",
+        "minCount": 10,
+        "saleRate": 10
+      },
+      {
+        "id": 3,
+        "seat": "2A",
+        "price": "100",
+        "minCount": 10,
+        "saleRate": 10
+      },
+      {
+        "id": 3,
+        "seat": "3A",
+        "price": "100",
+        "minCount": 10,
+        "saleRate": 10
+      },
+      {
+        "id": 4,
+        "seat": "4A",
+        "price": "100",
+        "minCount": 10,
+        "saleRate": 10
+      }
+    ]
+  },
+  {
+    "id": 7,
+    "contract": "0x2aa3cd894482ccaa113948",
+    "title": "Opside Pre-alpha Testnet Carnival",
+    "description": "Welcome to the exhilarating Opside Pre-alpha Testnet Carnival! This unparalleled event marks the beginning of a new era in the world of decentralized technology, as it showcases the innovative potential of the Opside network before its official launch. Brace yourself for a thrilling ride through a world of cutting-edge blockchain solutions, inventive gaming experiences, and unmatched community engagement.",
+    "imgUrl": "https://cdn.galxe.com/galaxy/opside/aaa17f58-7ab8-405e-906f-a46063d1e5c0.png",
+    "tickets": [
+      {
+        "id": 1,
+        "seat": "1A",
+        "price": "100",
+        "minCount": 10,
+        "saleRate": 10
+      },
+      {
+        "id": 3,
+        "seat": "2A",
+        "price": "100",
+        "minCount": 10,
+        "saleRate": 10
+      },
+      {
+        "id": 3,
+        "seat": "3A",
+        "price": "100",
+        "minCount": 10,
+        "saleRate": 10
+      },
+      {
+        "id": 4,
+        "seat": "4A",
+        "price": "100",
+        "minCount": 10,
+        "saleRate": 10
+      }
+    ]
+  },
+  {
+    "id": 8,
+    "contract": "0x2aa3cd894482ccaa113948",
+    "title": "Opside Pre-alpha Testnet Carnival",
+    "description": "Welcome to the exhilarating Opside Pre-alpha Testnet Carnival! This unparalleled event marks the beginning of a new era in the world of decentralized technology, as it showcases the innovative potential of the Opside network before its official launch. Brace yourself for a thrilling ride through a world of cutting-edge blockchain solutions, inventive gaming experiences, and unmatched community engagement.",
+    "imgUrl": "https://cdn.galxe.com/galaxy/opside/aaa17f58-7ab8-405e-906f-a46063d1e5c0.png",
+    "tickets": [
+      {
+        "id": 1,
+        "seat": "1A",
+        "price": "100",
+        "minCount": 10,
+        "saleRate": 10
+      },
+      {
+        "id": 3,
+        "seat": "2A",
+        "price": "100",
+        "minCount": 10,
+        "saleRate": 10
+      },
+      {
+        "id": 3,
+        "seat": "3A",
+        "price": "100",
+        "minCount": 10,
+        "saleRate": 10
+      },
+      {
+        "id": 4,
+        "seat": "4A",
+        "price": "100",
+        "minCount": 10,
+        "saleRate": 10
       }
     ]
   }

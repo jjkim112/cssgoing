@@ -1,11 +1,12 @@
-import React, { ReactNode } from 'react';
-import './ProjectStyles.css';
+import React, { ReactNode } from "react";
+import "./ProjectStyles.css";
+import Link from "next/link";
 
-function ProjectCreateButton({ ...restProps }) {
+function ProjectCreateButton() {
   return (
-    <div className="project-create-button" {...restProps}>
-      Project 생성
-    </div>
+    <Link href="project/create">
+      <div className="project-create-button">Project 생성</div>
+    </Link>
   );
 }
 
