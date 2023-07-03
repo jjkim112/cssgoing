@@ -9,15 +9,10 @@
   display: flex;
   justify-content: space-between;
   background-color: #fff;
-  padding: 20px 30px;
-  width: 100%;
+  padding: 10px;
 }
 
-@media (max-width: 550px) {
-  .header-wrapper-home {
-    padding: 15px 20px;
-  }
-}
+
 
 .navbar-home {
   color: black;

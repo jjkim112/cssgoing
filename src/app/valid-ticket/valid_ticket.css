@@ -1,0 +1,9 @@
+.valid_con {
+  display: flex;
+  justify-content: center;
+}
+
+.valid_title {
+  font-size: 20px;
+  font-weight: bold;
+}

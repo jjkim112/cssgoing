@@ -1,11 +1,11 @@
-import React from "react";
-import "./FooterStyles.css";
-import FooterLink from "./FooterLink";
-import Image from "next/image";
+import React from 'react';
+import './FooterStyles.css';
+import FooterLink from './FooterLink';
+import Image from 'next/image';
 
 function FooterCompound() {
   return (
-    <footer className="footer-wrapper">
+    <footer className="footer-wrapper inner">
       <div className="footer-title">
         <Image
           className="logo"
@@ -44,7 +44,6 @@ function FooterCompound() {
           <FooterLink>Phone</FooterLink>
         </div>
       </div>
-      ;
     </footer>
   );
 }

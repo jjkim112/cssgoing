@@ -1,12 +1,12 @@
-"use client";
-import React, { FC, ReactNode } from "react";
-import Link from "next/link";
-import "./HeaderStyles.css";
-import Image from "next/image";
-import { ethereum } from "@/lib/web3.config";
-import { useContext } from "react";
-import { AppContext } from "@/app/layout";
-import useSWR from "swr";
+'use client';
+import React, { FC, ReactNode } from 'react';
+import Link from 'next/link';
+import './HeaderStyles.css';
+import Image from 'next/image';
+import { ethereum } from '@/lib/web3.config';
+import { useContext } from 'react';
+import { AppContext } from '@/app/layout';
+import useSWR from 'swr';
 interface HeaderProps {
   className?: string;
   children?: ReactNode;
@@ -17,7 +17,7 @@ const HeaderCustom: FC<HeaderProps> = () => {
   const onClickLogIn = async () => {
     try {
       const accounts = await ethereum?.request({
-        method: "eth_requestAccounts",
+        method: 'eth_requestAccounts',
         params: [],
       });
 
@@ -27,8 +27,8 @@ const HeaderCustom: FC<HeaderProps> = () => {
     }
   };
   return (
-    <div className="header_inner">
-      <header className="header-wrapper-home">
+    <div className="header_inner  ">
+      <header className="header-wrapper-home inner">
         <nav className="navbar-home">
           <Link href="/">
             <Image

@@ -2,9 +2,9 @@
 
 .footer-wrapper {
   background-color: #fff;
-  max-width: 1850px;
+  max-width: 1240px;
   margin: auto;
-  padding: 30px 20px;
+  padding: 10px 10px;
 }
 
 .footer-title {
@@ -13,17 +13,7 @@
   margin-bottom: 20px;
 }
 
-@media (max-width: 740px) {
-  .footer-wrapper {
-    padding: 30px 20px;
-  }
-}
 
-@media (max-width: 500px) {
-  .footer-wrapper {
-    padding: 30px 15px;
-  }
-}
 
 .footer-row {
   margin-top: 40px;
@@ -53,6 +43,7 @@
   margin-bottom: 20px;
   font-size: 13px;
 }
+
 .footer-link-title {
   font-size: 18px;
   color: black;

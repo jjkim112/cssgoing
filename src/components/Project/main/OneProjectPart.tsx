@@ -1,15 +1,15 @@
-"use client";
-import React, { ReactNode, useEffect, useState } from "react";
-import "./ProjectStyles.css";
-import OneQuestPart, { Quest } from "./OneQuestPart";
+'use client';
+import React, { ReactNode, useEffect, useState } from 'react';
+import './ProjectStyles.css';
+import OneQuestPart, { Quest } from './OneQuestPart';
 
-import Dialog from "@mui/material/Dialog";
-import DialogActions from "@mui/material/DialogActions";
-import DialogContent from "@mui/material/DialogContent";
-import DialogContentText from "@mui/material/DialogContentText";
-import DialogTitle from "@mui/material/DialogTitle";
-import Button from "@mui/material/Button";
-import OneTicketThumb from "./OneTicketThumb";
+import Dialog from '@mui/material/Dialog';
+import DialogActions from '@mui/material/DialogActions';
+import DialogContent from '@mui/material/DialogContent';
+import DialogContentText from '@mui/material/DialogContentText';
+import DialogTitle from '@mui/material/DialogTitle';
+import Button from '@mui/material/Button';
+import OneTicketThumb from './OneTicketThumb';
 
 // export interface ProjectData {
 //   id: number;
@@ -64,7 +64,7 @@ function OneProjectPart({ projectData, ...restProps }: OneProjectPartProps) {
   if (projectData) {
     return (
       <div className="w-full flex justify-center">
-        <div className="max-w-[1850px]">
+        <div className="inner">
           <div className="project-title">{projectData.title}</div>
           <div className="project-description">{projectData.description}</div>
           <img className="project-img" src={projectData.imgUrl} alt="" />
@@ -100,7 +100,7 @@ function OneProjectPart({ projectData, ...restProps }: OneProjectPartProps) {
             }}
           >
             {nowTime > lastCheckTime + 10000
-              ? "출석하기"
+              ? '출석하기'
               : `남은 시간 : ${(
                   (lastCheckTime + 10000 - nowTime) /
                   1000

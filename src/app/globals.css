@@ -1,3 +1,34 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.inner {
+  width: 1240px;
+}
+
+@media (max-width: 1240px) {
+  .inner {
+
+    width: 1040px;
+  }
+}
+
+@media (max-width: 1024px) {
+  .inner {
+    width: 824px;
+  }
+}
+
+@media (max-width: 760px) {
+  .inner {
+    width: 660px;
+
+  }
+}
+
+@media (max-width: 540px) {
+  .inner {
+    width: 440px;
+
+  }
+}

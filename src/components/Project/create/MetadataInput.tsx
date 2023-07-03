@@ -1,6 +1,6 @@
-"use client";
-import MetadataTextInput from "./MetadataTextInput";
-import { FC, useState } from "react";
+'use client';
+import MetadataTextInput from './MetadataTextInput';
+import { FC, useState } from 'react';
 
 type TextInputs = {
   id: number;
@@ -15,20 +15,20 @@ interface MetadataInputProps {
 const MetadataInput: FC<MetadataInputProps> = ({ addNftFunc }) => {
   const [textInputs, setTextInputs] = useState<TextInputs[]>([]);
   const [nextId, setNextId] = useState(1);
-  const [titleTemp, setTitleTemp] = useState("");
+  const [titleTemp, setTitleTemp] = useState('');
 
   const initWholeVariable = () => {
-    setTitleTemp("");
+    setTitleTemp('');
   };
 
   const handleAddInput = () => {
-    if (titleTemp !== "") {
+    if (titleTemp !== '') {
       setTextInputs([
         ...textInputs,
-        { id: nextId, title: titleTemp, value: "" },
+        { id: nextId, title: titleTemp, value: '' },
       ]);
       setNextId(nextId + 1);
-      setTitleTemp("");
+      setTitleTemp('');
     }
   };
 
@@ -62,7 +62,7 @@ const MetadataInput: FC<MetadataInputProps> = ({ addNftFunc }) => {
   };
 
   const addOneNft = () => {
-    console.log("제출된 텍스트:", textInputs);
+    console.log('제출된 텍스트:', textInputs);
     let tempMap: Map<string, string> = new Map();
     for (let index = 0; index < textInputs.length; index++) {
       const element = textInputs[index];
@@ -97,7 +97,7 @@ const MetadataInput: FC<MetadataInputProps> = ({ addNftFunc }) => {
             type="button"
             onClick={handleAddInput}
           >
-            +
+            개별정보 추가 +
           </button>
         </div>
       </div>
