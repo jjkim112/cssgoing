@@ -45,7 +45,8 @@ function OneProjectPart({ projectData, ...restProps }: OneProjectPartProps) {
   const [nowTime, setNowTime] = useState<number>(Date.now());
   const [openDialog, setOpenDialog] = useState<boolean>(false);
 
-  const [count, setCount] = useState<number[]>([]);
+  // const [count, setCount] = useState<number[]>([]);
+  const [count, setCount] = useState<number>(0);
 
   const handleClickOpen = () => {
     setOpenDialog(true);
@@ -75,8 +76,9 @@ function OneProjectPart({ projectData, ...restProps }: OneProjectPartProps) {
                 return <OneTicketThumb value={v} />;
               })}
           </div>
-
-          <div className="flex flex-wrap justify-center my-3 w-[80%] mx-auto">
+          {/*체인저 버전 */}
+          {/* <div className="flex flex-wrap justify-center my-3 w-[80%] mx-auto text-[]">
+           
             {count.map((v, i) => {
               return (
                 <div className="border-[1px] mx-2 my-1 border-black w-10 text-center px-4 py-2">
@@ -84,6 +86,31 @@ function OneProjectPart({ projectData, ...restProps }: OneProjectPartProps) {
                 </div>
               );
             })}
+          </div> */}
+          {/* <div className="project-quest">
+            {projectData.quests.map((v, i) => {
+              return <OneQuestPart quest={v} key={i} />;
+            })}
+          </div> */}
+          {/* <div
+            className="mx-auto hover:cursor-pointer border-[1px] border-black rounded-3xl w-40 py-2 text-center"
+            onClick={() => {
+              if (nowTime > lastCheckTime + 10000) {
+                setCount((prev) => [0, ...prev]);
+                setLastCheckTime(Date.now());
+              }
+            }}
+          >
+            {nowTime > lastCheckTime + 10000
+              ? '출석하기'
+              : `남은 시간 : ${(
+                  (lastCheckTime + 10000 - nowTime) /
+                  1000
+                ).toFixed(1)} s`}
+          </div> */}
+
+          <div className="flex flex-wrap justify-center my-3 w-[80%] mx-auto text-[20px]">
+            출석일 수 : {count}
           </div>
           {/* <div className="project-quest">
             {projectData.quests.map((v, i) => {
@@ -94,7 +121,7 @@ function OneProjectPart({ projectData, ...restProps }: OneProjectPartProps) {
             className="mx-auto hover:cursor-pointer border-[1px] border-black rounded-3xl w-40 py-2 text-center"
             onClick={() => {
               if (nowTime > lastCheckTime + 10000) {
-                setCount((prev) => [0, ...prev]);
+                setCount(count + 1);
                 setLastCheckTime(Date.now());
               }
             }}
