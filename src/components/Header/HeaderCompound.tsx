@@ -49,6 +49,9 @@ const HeaderCustom: FC<HeaderProps> = () => {
           <Link href="/valid-ticket">
             <div className="header-menu-item">유효 티켓 확인</div>
           </Link>
+          <Link href="/pinata">
+            <div className="header-menu-item">pinata</div>
+          </Link>
         </nav>
         {account ? (
           <div className="connect-wallet-button">
