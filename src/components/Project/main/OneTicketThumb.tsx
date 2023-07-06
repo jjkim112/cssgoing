@@ -1,4 +1,4 @@
-import { TicketType } from "./OneProjectPart";
+import { TicketType } from './OneProjectPart';
 
 interface OneTicketThumbProps {
   value: TicketType;
@@ -7,10 +7,10 @@ function OneTicketThumb({ value }: OneTicketThumbProps) {
   return (
     <div className="relative mx-2 my-1 border-sky-100 w-fit border-[1px] p-4 rounded-xl">
       <div> id : {value.id}</div>
-      <div> price : {value.price}</div>
-      <div> seat : {value.seat}</div>
-      <div> minCount : {value.minCount}</div>
-      <div> sale-rate : {value.saleRate}</div>
+      <div> 가격 : {value.price}</div>
+      <div> 좌석 : {value.seat}</div>
+      <div> 최소출석일수 : {value.minimum_attendance}</div>
+      <div> 티켓 발급 상태 : {value.ticket_is_used ? '발급' : '미발급'}</div>
     </div>
   );
 }

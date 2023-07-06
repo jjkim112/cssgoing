@@ -1,6 +1,5 @@
-import { thumbText } from "@/utils/custom_text";
-import { FC } from "react";
-import { AiOutlineMinusCircle } from "react-icons/ai";
+import { FC } from 'react';
+import { AiOutlineMinusCircle } from 'react-icons/ai';
 interface MetadataProps {
   removeFunc: () => void;
   value: Map<string, string>;
@@ -17,7 +16,7 @@ const OneMetadataItem: FC<MetadataProps> = ({ removeFunc, value }) => {
         size={15}
       />
       {Array.from(value.entries()).map(([key, value]) => {
-        return <div key={key}>{`${key} : ${thumbText(value)}`}</div>;
+        return <div key={key}>{`${key} : ${value}`}</div>;
       })}
     </div>
   );

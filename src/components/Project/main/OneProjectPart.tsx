@@ -1,21 +1,21 @@
-"use client";
-import React, { ReactNode, useEffect, useState } from "react";
-import "./ProjectStyles.css";
-import OneQuestPart, { Quest } from "./OneQuestPart";
+'use client';
+import React, { ReactNode, useEffect, useState } from 'react';
+import './ProjectStyles.css';
+import OneQuestPart, { Quest } from './OneQuestPart';
 
-import Dialog from "@mui/material/Dialog";
-import DialogActions from "@mui/material/DialogActions";
-import DialogContent from "@mui/material/DialogContent";
-import DialogContentText from "@mui/material/DialogContentText";
-import DialogTitle from "@mui/material/DialogTitle";
-import Button from "@mui/material/Button";
-import OneTicketThumb from "./OneTicketThumb";
+import Dialog from '@mui/material/Dialog';
+import DialogActions from '@mui/material/DialogActions';
+import DialogContent from '@mui/material/DialogContent';
+import DialogContentText from '@mui/material/DialogContentText';
+import DialogTitle from '@mui/material/DialogTitle';
+import Button from '@mui/material/Button';
+import OneTicketThumb from './OneTicketThumb';
 import {
   dateToStr,
   dateToStrEng,
   msToPeriodStrEng,
   oneDayDateNumber,
-} from "@/utils/date_util";
+} from '@/utils/date_util';
 
 // export interface ProjectData {
 //   id: number;
@@ -88,9 +88,9 @@ function OneProjectPart({ projectData, ...restProps }: OneProjectPartProps) {
     return (
       <div className="w-full flex justify-center">
         <div className="inner">
+          <img className="project-img" src={projectData.imgUrl} alt="" />
           <div className="project-title">{projectData.title}</div>
           <div className="project-description">{projectData.description}</div>
-          <img className="project-img" src={projectData.imgUrl} alt="" />
           <div className="text-center">티켓 목록</div>
           <div className="mx-auto flex flex-wrap w-1/2">
             {projectData &&
