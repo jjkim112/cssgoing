@@ -1,15 +1,21 @@
-'use client';
-import React, { ReactNode, useEffect, useState } from 'react';
-import './ProjectStyles.css';
-import OneQuestPart, { Quest } from './OneQuestPart';
+"use client";
+import React, { ReactNode, useEffect, useState } from "react";
+import "./ProjectStyles.css";
+import OneQuestPart, { Quest } from "./OneQuestPart";
 
-import Dialog from '@mui/material/Dialog';
-import DialogActions from '@mui/material/DialogActions';
-import DialogContent from '@mui/material/DialogContent';
-import DialogContentText from '@mui/material/DialogContentText';
-import DialogTitle from '@mui/material/DialogTitle';
-import Button from '@mui/material/Button';
-import OneTicketThumb from './OneTicketThumb';
+import Dialog from "@mui/material/Dialog";
+import DialogActions from "@mui/material/DialogActions";
+import DialogContent from "@mui/material/DialogContent";
+import DialogContentText from "@mui/material/DialogContentText";
+import DialogTitle from "@mui/material/DialogTitle";
+import Button from "@mui/material/Button";
+import OneTicketThumb from "./OneTicketThumb";
+import {
+  dateToStr,
+  dateToStrEng,
+  msToPeriodStrEng,
+  oneDayDateNumber,
+} from "@/utils/date_util";
 
 // export interface ProjectData {
 //   id: number;
@@ -56,11 +62,27 @@ function OneProjectPart({ projectData, ...restProps }: OneProjectPartProps) {
     setOpenDialog(false);
   };
 
+  const getUserAttendance = async () => {
+    //
+    //const response = await contract....;
+    setCount((prev) => prev);
+  };
+
   useEffect(() => {
     setInterval(() => {
       setNowTime(Date.now());
     }, 100);
   }, []);
+
+  const clickAttendance = async () => {
+    if (nowTime >= lastCheckTime) {
+      // TODO await attendance 함수 실행
+      // TODO await get User Attendance 함수 호출
+      setCount((v) => v);
+      // TODO await get Last Check Time 함수 호출
+      setLastCheckTime((v) => v);
+    }
+  };
 
   if (projectData) {
     return (
@@ -76,63 +98,33 @@ function OneProjectPart({ projectData, ...restProps }: OneProjectPartProps) {
                 return <OneTicketThumb value={v} />;
               })}
           </div>
-          {/*체인저 버전 */}
-          {/* <div className="flex flex-wrap justify-center my-3 w-[80%] mx-auto text-[]">
-           
-            {count.map((v, i) => {
-              return (
-                <div className="border-[1px] mx-2 my-1 border-black w-10 text-center px-4 py-2">
-                  {v}
-                </div>
-              );
-            })}
-          </div> */}
-          {/* <div className="project-quest">
-            {projectData.quests.map((v, i) => {
-              return <OneQuestPart quest={v} key={i} />;
-            })}
-          </div> */}
-          {/* <div
-            className="mx-auto hover:cursor-pointer border-[1px] border-black rounded-3xl w-40 py-2 text-center"
-            onClick={() => {
-              if (nowTime > lastCheckTime + 10000) {
-                setCount((prev) => [0, ...prev]);
-                setLastCheckTime(Date.now());
-              }
-            }}
-          >
-            {nowTime > lastCheckTime + 10000
-              ? '출석하기'
-              : `남은 시간 : ${(
-                  (lastCheckTime + 10000 - nowTime) /
-                  1000
-                ).toFixed(1)} s`}
-          </div> */}
 
           <div className="flex flex-wrap justify-center my-3 w-[80%] mx-auto text-[20px]">
             출석일 수 : {count}
           </div>
-          {/* <div className="project-quest">
-            {projectData.quests.map((v, i) => {
-              return <OneQuestPart quest={v} key={i} />;
-            })}
-          </div> */}
-          <div
-            className="mx-auto hover:cursor-pointer border-[1px] border-black rounded-3xl w-40 py-2 text-center"
-            onClick={() => {
-              if (nowTime > lastCheckTime + 10000) {
-                setCount(count + 1);
-                setLastCheckTime(Date.now());
-              }
-            }}
-          >
-            {nowTime > lastCheckTime + 10000
-              ? '출석하기'
-              : `남은 시간 : ${(
-                  (lastCheckTime + 10000 - nowTime) /
-                  1000
-                ).toFixed(1)} s`}
-          </div>
+          {nowTime > lastCheckTime ? (
+            <div
+              className="flex flex-col justify-center items-center mx-auto hover:cursor-pointer border-[1px] border-black rounded-3xl w-[300px] py-2 text-center"
+              onClick={clickAttendance}
+            >
+              <div className="text-[18px] font-bold mb-1">출석하기</div>
+              {lastCheckTime !== 0 ? (
+                <div className="text-[12px] text-gray-300">{`최근 출석 : ${dateToStrEng(
+                  new Date(lastCheckTime)
+                )}`}</div>
+              ) : null}
+              {/* <div className="text-[12px] text-gray-300">{`최근 출석 : ${dateToStrEng(
+                new Date(lastCheckTime)
+              )}`}</div> */}
+            </div>
+          ) : (
+            <div className="flex justify-center mx-auto hover:cursor-pointer border-[1px] border-black rounded-3xl w-[300px] py-2 text-center">
+              <div className="mr-[4px]">남은 시간 : </div>
+              <div className="text-red-500">
+                {msToPeriodStrEng(lastCheckTime - nowTime)}
+              </div>
+            </div>
+          )}
 
           <div
             className="project-minting my-4"
