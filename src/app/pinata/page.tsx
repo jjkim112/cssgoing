@@ -2,6 +2,7 @@
 import { ChangeEvent, useState } from 'react';
 import axios from 'axios';
 import FormData from 'form-data';
+const basePathConverter = require('base-path-converter');
 const pinataJwt = process.env.NEXT_PUBLIC_JWT;
 
 export default function PinataForm(): JSX.Element {
@@ -9,16 +10,20 @@ export default function PinataForm(): JSX.Element {
   const [metadata, setMetadata] = useState<
     { [key: string]: string } | undefined
   >();
+
   const [options, setOptions] = useState<
     { [key: string]: string } | undefined
   >();
   const [result, setResult] = useState();
+
+  const src = './pinata';
 
   const handleFileChange = async (event: any) => {
     event.preventDefault();
     if (!event.target.files) {
       return;
     }
+    console.log(event.target.files);
     setFile(event.target.files);
   };
 
@@ -51,14 +56,13 @@ export default function PinataForm(): JSX.Element {
       alert('Please select a file');
       return;
     }
+    const files = [...file];
+    console.log(files);
 
     const form = new FormData();
-    for (let i = 0; i < file.length; i++) {
-      form.append('file', file[i], {
-        filename: `543543${i}.json`,
-        filepath: `543543${i}.json`,
-      });
-    }
+    files.map((v, i) => {
+      form.append(`file`, v);
+    });
 
     if (metadata) {
       form.append('pinataMetadata', JSON.stringify(metadata));
@@ -67,48 +71,49 @@ export default function PinataForm(): JSX.Element {
     if (options) {
       form.append(
         'pinataOptions',
-        JSON.stringify({ wrapWithDirectory: true, cidVersion: 0 })
+        JSON.stringify({ wrapWithDirectory: false, cidVersion: 0 })
       );
     }
 
+    // var data = JSON.stringify({
+    //   pinataOptions: {
+    //     cidVersion: 1,
+    //     wrapWithDirectory: true,
+    //   },
+    //   pinataMetadata: {
+    //     name: 'testing',
+    //     keyvalues: {
+    //       customKey: 'customValue',
+    //       customKey2: 'customValue2',
+    //     },
+    //   },
+    //   pinataContent: {
+    //     somekey: 'somevalue',
+    //   },
+    // });
     // var config = {
     //   method: 'post',
-    //   url: 'https://api.pinata.cloud/pinning/pinFileToIPFS',
+    //   url: 'https://api.pinata.cloud/pinning/pinJSONToIPFS',
     //   headers: {
-    //     'Content-Type': `multipart/form-data; boundary=${form.getBoundary}`,
+    //     'Content-Type': 'application/json',
     //     Authorization: `Bearer ${pinataJwt}`,
     //   },
-    //   data: form,
+    //   data: data,
     // };
-    var data = JSON.stringify({
-      pinataOptions: {
-        cidVersion: 1,
-        wrapWithDirectory: true,
-      },
-      pinataMetadata: {
-        name: 'testing',
-        keyvalues: {
-          customKey: 'customValue',
-          customKey2: 'customValue2',
-        },
-      },
-      pinataContent: {
-        somekey: 'somevalue',
-      },
-    });
-    var config = {
-      method: 'post',
-      url: 'https://api.pinata.cloud/pinning/pinJSONToIPFS',
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${pinataJwt}`,
-      },
-      data: data,
-    };
 
     try {
-      const response = await axios(config);
-      console.log(response.data);
+      const res = await axios.post(
+        'https://api.pinata.cloud/pinning/pinFileToIPFS',
+        form,
+        {
+          maxBodyLength: 'Infinity',
+          headers: {
+            'Content-Type': `multipart/form-data; boundary=${form._boundary}`,
+            Authorization: `Bearer ${pinataJwt}`,
+          },
+        }
+      );
+      console.log(res.data);
     } catch (error) {
       console.error(error);
     }
@@ -117,7 +122,12 @@ export default function PinataForm(): JSX.Element {
   return (
     <form encType="multipart/form-data" onSubmit={handleSubmit}>
       <div>
-        <input multiple type="file" onChange={handleFileChange} />
+        <input
+          directory=""
+          webkitdirectory=""
+          type="file"
+          onChange={handleFileChange}
+        />
       </div>
       <div>
         <label htmlFor="name">Name:</label>

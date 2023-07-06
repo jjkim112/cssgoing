@@ -32,8 +32,8 @@ export type TicketType = {
   id: number; // tokenId
   seat: string;
   price: string;
-  minCount: number;
-  saleRate: number;
+  minimum_attendance: number;
+  ticket_is_used: boolean;
 };
 
 interface OneProjectPartProps {

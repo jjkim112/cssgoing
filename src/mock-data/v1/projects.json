@@ -10,29 +10,29 @@
         "id": 1,
         "seat": "1A",
         "price": "100",
-        "minCount": 10,
-        "saleRate": 10
+        "minimum_attendance": 10,
+        "ticket_is_used": false
       },
       {
         "id": 3,
         "seat": "2A",
         "price": "100",
-        "minCount": 10,
-        "saleRate": 10
+        "minimum_attendance": 10,
+        "ticket_is_used": false
       },
       {
         "id": 3,
         "seat": "3A",
         "price": "100",
-        "minCount": 10,
-        "saleRate": 10
+        "minimum_attendance": 10,
+        "ticket_is_used": false
       },
       {
         "id": 4,
         "seat": "4A",
         "price": "100",
-        "minCount": 10,
-        "saleRate": 10
+        "minimum_attendance": 10,
+        "ticket_is_used": false
       }
     ]
   },
@@ -47,29 +47,29 @@
         "id": 1,
         "seat": "1A",
         "price": "100",
-        "minCount": 10,
-        "saleRate": 10
+        "minimum_attendance": 10,
+        "ticket_is_used": false
       },
       {
         "id": 3,
         "seat": "2A",
         "price": "100",
-        "minCount": 10,
-        "saleRate": 10
+        "minimum_attendance": 10,
+        "ticket_is_used": false
       },
       {
         "id": 3,
         "seat": "3A",
         "price": "100",
-        "minCount": 10,
-        "saleRate": 10
+        "minimum_attendance": 10,
+        "ticket_is_used": false
       },
       {
         "id": 4,
         "seat": "4A",
         "price": "100",
-        "minCount": 10,
-        "saleRate": 10
+        "minimum_attendance": 10,
+        "ticket_is_used": false
       }
     ]
   },
@@ -84,29 +84,29 @@
         "id": 1,
         "seat": "1A",
         "price": "100",
-        "minCount": 10,
-        "saleRate": 10
+        "minimum_attendance": 10,
+        "ticket_is_used": false
       },
       {
         "id": 3,
         "seat": "2A",
         "price": "100",
-        "minCount": 10,
-        "saleRate": 10
+        "minimum_attendance": 10,
+        "ticket_is_used": false
       },
       {
         "id": 3,
         "seat": "3A",
         "price": "100",
-        "minCount": 10,
-        "saleRate": 10
+        "minimum_attendance": 10,
+        "ticket_is_used": false
       },
       {
         "id": 4,
         "seat": "4A",
         "price": "100",
-        "minCount": 10,
-        "saleRate": 10
+        "minimum_attendance": 10,
+        "ticket_is_used": false
       }
     ]
   },
@@ -121,29 +121,29 @@
         "id": 1,
         "seat": "1A",
         "price": "100",
-        "minCount": 10,
-        "saleRate": 10
+        "minimum_attendance": 10,
+        "ticket_is_used": false
       },
       {
         "id": 3,
         "seat": "2A",
         "price": "100",
-        "minCount": 10,
-        "saleRate": 10
+        "minimum_attendance": 10,
+        "ticket_is_used": false
       },
       {
         "id": 3,
         "seat": "3A",
         "price": "100",
-        "minCount": 10,
-        "saleRate": 10
+        "minimum_attendance": 10,
+        "ticket_is_used": false
       },
       {
         "id": 4,
         "seat": "4A",
         "price": "100",
-        "minCount": 10,
-        "saleRate": 10
+        "minimum_attendance": 10,
+        "ticket_is_used": false
       }
     ]
   },
@@ -158,29 +158,29 @@
         "id": 1,
         "seat": "1A",
         "price": "100",
-        "minCount": 10,
-        "saleRate": 10
+        "minimum_attendance": 10,
+        "ticket_is_used": false
       },
       {
         "id": 3,
         "seat": "2A",
         "price": "100",
-        "minCount": 10,
-        "saleRate": 10
+        "minimum_attendance": 10,
+        "ticket_is_used": false
       },
       {
         "id": 3,
         "seat": "3A",
         "price": "100",
-        "minCount": 10,
-        "saleRate": 10
+        "minimum_attendance": 10,
+        "ticket_is_used": false
       },
       {
         "id": 4,
         "seat": "4A",
         "price": "100",
-        "minCount": 10,
-        "saleRate": 10
+        "minimum_attendance": 10,
+        "ticket_is_used": false
       }
     ]
   },
@@ -195,29 +195,29 @@
         "id": 1,
         "seat": "1A",
         "price": "100",
-        "minCount": 10,
-        "saleRate": 10
+        "minimum_attendance": 10,
+        "ticket_is_used": false
       },
       {
         "id": 3,
         "seat": "2A",
         "price": "100",
-        "minCount": 10,
-        "saleRate": 10
+        "minimum_attendance": 10,
+        "ticket_is_used": false
       },
       {
         "id": 3,
         "seat": "3A",
         "price": "100",
-        "minCount": 10,
-        "saleRate": 10
+        "minimum_attendance": 10,
+        "ticket_is_used": false
       },
       {
         "id": 4,
         "seat": "4A",
         "price": "100",
-        "minCount": 10,
-        "saleRate": 10
+        "minimum_attendance": 10,
+        "ticket_is_used": false
       }
     ]
   },
@@ -232,29 +232,29 @@
         "id": 1,
         "seat": "1A",
         "price": "100",
-        "minCount": 10,
-        "saleRate": 10
+        "minimum_attendance": 10,
+        "ticket_is_used": false
       },
       {
         "id": 3,
         "seat": "2A",
         "price": "100",
-        "minCount": 10,
-        "saleRate": 10
+        "minimum_attendance": 10,
+        "ticket_is_used": false
       },
       {
         "id": 3,
         "seat": "3A",
         "price": "100",
-        "minCount": 10,
-        "saleRate": 10
+        "minimum_attendance": 10,
+        "ticket_is_used": false
       },
       {
         "id": 4,
         "seat": "4A",
         "price": "100",
-        "minCount": 10,
-        "saleRate": 10
+        "minimum_attendance": 10,
+        "ticket_is_used": false
       }
     ]
   },
@@ -269,29 +269,29 @@
         "id": 1,
         "seat": "1A",
         "price": "100",
-        "minCount": 10,
-        "saleRate": 10
+        "minimum_attendance": 10,
+        "ticket_is_used": false
       },
       {
         "id": 3,
         "seat": "2A",
         "price": "100",
-        "minCount": 10,
-        "saleRate": 10
+        "minimum_attendance": 10,
+        "ticket_is_used": false
       },
       {
         "id": 3,
         "seat": "3A",
         "price": "100",
-        "minCount": 10,
-        "saleRate": 10
+        "minimum_attendance": 10,
+        "ticket_is_used": false
       },
       {
         "id": 4,
         "seat": "4A",
         "price": "100",
-        "minCount": 10,
-        "saleRate": 10
+        "minimum_attendance": 10,
+        "ticket_is_used": false
       }
     ]
   }
