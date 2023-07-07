@@ -1,21 +1,21 @@
-'use client';
-import React, { ReactNode, useEffect, useState } from 'react';
-import './ProjectStyles.css';
-import OneQuestPart, { Quest } from './OneQuestPart';
+"use client";
+import React, { ReactNode, useEffect, useState } from "react";
+import "./ProjectStyles.css";
+import OneQuestPart, { Quest } from "./OneQuestPart";
 
-import Dialog from '@mui/material/Dialog';
-import DialogActions from '@mui/material/DialogActions';
-import DialogContent from '@mui/material/DialogContent';
-import DialogContentText from '@mui/material/DialogContentText';
-import DialogTitle from '@mui/material/DialogTitle';
-import Button from '@mui/material/Button';
-import OneTicketThumb from './OneTicketThumb';
+import Dialog from "@mui/material/Dialog";
+import DialogActions from "@mui/material/DialogActions";
+import DialogContent from "@mui/material/DialogContent";
+import DialogContentText from "@mui/material/DialogContentText";
+import DialogTitle from "@mui/material/DialogTitle";
+import Button from "@mui/material/Button";
+import OneTicketThumb from "./OneTicketThumb";
 import {
   dateToStr,
   dateToStrEng,
   msToPeriodStrEng,
   oneDayDateNumber,
-} from '@/utils/date_util';
+} from "@/utils/date_util";
 
 // export interface ProjectData {
 //   id: number;
@@ -78,9 +78,9 @@ function OneProjectPart({ projectData, ...restProps }: OneProjectPartProps) {
     if (nowTime >= lastCheckTime) {
       // TODO await attendance 함수 실행
       // TODO await get User Attendance 함수 호출
-      setCount((v) => v);
+      setCount((v) => v + 1);
       // TODO await get Last Check Time 함수 호출
-      setLastCheckTime((v) => v);
+      setLastCheckTime((v) => Date.now() + 10000);
     }
   };
 
