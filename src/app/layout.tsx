@@ -4,6 +4,7 @@ import './globals.css';
 import { Inter } from 'next/font/google';
 import FooterCompound from '@/components/Footer/FooterCompound';
 import { useState, createContext } from 'react';
+import TicketProjectListProvider from '@/context/contractContext';
 
 const inter = Inter({ subsets: ['latin'] });
 export const AppContext = createContext<any>(null);
@@ -21,11 +22,13 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        <AppContext.Provider value={{ account, setAccount }}>
-          <HeaderCustom />
-          {children}
-          <FooterCompound />
-        </AppContext.Provider>
+        <TicketProjectListProvider>
+          <AppContext.Provider value={{ account, setAccount }}>
+            <HeaderCustom />
+            {children}
+            <FooterCompound />
+          </AppContext.Provider>
+        </TicketProjectListProvider>
       </body>
     </html>
   );
