@@ -54,7 +54,7 @@
         "seat": "1A",
         "price": "100",
         "minimum_attendance": 10,
-        "ticket_is_used": false
+        "ticket_is_used": true
       },
       {
         "id": 3,

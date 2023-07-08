@@ -10,8 +10,8 @@ type AttributeSet = {
 };
 
 type JsonObject = {
-  imgUrl: string;
-  title: string;
+  image: string;
+  name: string;
   description: string;
   attributes: AttributeSet[];
 };

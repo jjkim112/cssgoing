@@ -5,6 +5,7 @@ export default function project() {
     <div className="w-full flex justify-center">
       <div className="inner">
         <ProjectCreateButton />
+        <div className="main_contentTitle ">현재 진행중인 프로젝트</div>
         <ProjectThumbCompount />
       </div>
     </div>
