@@ -1,20 +1,23 @@
 import { OneProject } from "@/domain/OneProject";
+import axios from "axios";
 import { createContext, useState, useContext, ReactNode } from "react";
 import { HexString16Bytes } from "web3";
 
+import mockdata from "../mock-data/v2/projects.json";
+
 interface TicketProjectListContextType {
   contracts: OneProject[];
-  addItem: (value: OneProject) => void;
-  updateList: (value: HexString16Bytes[]) => void;
+  updateList: (value: string[]) => Promise<void>;
   getProject: (addr: string) => OneProject | null;
+  updateTickets: (addr: string) => Promise<void>;
 }
 const TicketProjectListContext = createContext<TicketProjectListContextType>({
   contracts: [],
-  addItem: () => {},
-  updateList: () => {},
+  updateList: async () => {},
   getProject: () => {
     return null;
   },
+  updateTickets: async () => {},
 });
 
 export default function TicketProjectListProvider({
@@ -24,14 +27,28 @@ export default function TicketProjectListProvider({
 }) {
   const [projects, setProjects] = useState<OneProject[]>([]);
 
-  const addItem = async (value: OneProject) => {
-    setProjects((prevItems) => [...prevItems, value]);
+  const isInCache = () => {
+    return false;
   };
+  const updateList = async (list: string[]) => {
+    const ticketAddresses = ["1234", "2345"];
+    let projects: OneProject[] = [];
 
-  const updateList = (list: string[]) => {
-    // input 값은 각 1번 token url 이다.
-    // TODO Cache 알고리즘. 이미 한번 부른 친구면,. axios 안하기.
-    setProjects((prev) => prev);
+    for (let index = 0; index < ticketAddresses.length; index++) {
+      const t_addr: string = ticketAddresses[index];
+      if (isInCache()) {
+        // TODO 기존 값을 return
+        // 쟁점 부분. for문으로 읽어들이면, O(n)...
+      } else {
+        const ticketContract = mockdata.find((v, _) => v.address === t_addr);
+        if (ticketContract != null) {
+          // TODO 이부분은 Ticket Conctract 의 ~~/1.json 을 호출
+          const jsonData = await axios.get(ticketContract.urls[0]);
+          projects.push(OneProject.fromWebData(jsonData, t_addr));
+        }
+      }
+    }
+    setProjects(projects);
   };
 
   const getProject: (addr: string) => OneProject | null = (addr) => {
@@ -43,13 +60,32 @@ export default function TicketProjectListProvider({
     return null;
   };
 
+  const updateTickets = async (addr: string) => {
+    setProjects((prev) => {
+      let tempList: OneProject[] = [];
+      for (let index = 0; index < prev.length; index++) {
+        const element = prev[index];
+        if (element.contract === addr) {
+          element.contract = addr;
+          // TODO TicketURls 불러오는 함수.
+          const ticketUrls = [];
+
+          tempList.push(element);
+        } else {
+          tempList.push(element);
+        }
+      }
+      return tempList;
+    });
+  };
+
   return (
     <TicketProjectListContext.Provider
       value={{
         contracts: projects,
-        addItem,
         updateList,
         getProject,
+        updateTickets,
       }}
     >
       {children}
