@@ -1,4 +1,5 @@
 import ProjectThumbCompound from '@/compounds/ProjectThumbCompound';
+import ProjectTicketCheckCompound from '@/compounds/ProjectTicketCheckCompound';
 import React from 'react';
 
 export default function profile() {
@@ -11,12 +12,12 @@ export default function profile() {
         </div>
         <div className="text-[30px] font-bold py-10 px-2">
           <div>내 NFT 목록</div>
-          <ProjectThumbCompound />
+          <ProjectTicketCheckCompound />
         </div>
-        <div className="text-[30px] font-bold py-10 px-2">
+        {/* <div className="text-[30px] font-bold py-10 px-2">
           <div>내 파츠 NFT</div>
           <ProjectThumbCompound />
-        </div>
+        </div> */}
       </div>
     </div>
   );

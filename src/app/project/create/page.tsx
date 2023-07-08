@@ -11,7 +11,7 @@ import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
-import DialogTitle from '@mui/material/DialogTitle';
+import Dialogname from '@mui/material/DialogTitle';
 import Button from '@mui/material/Button';
 const pinataJwt = process.env.NEXT_PUBLIC_JWT;
 
@@ -21,15 +21,15 @@ type AttributeSet = {
 };
 
 type JsonObject = {
-  imgUrl: string;
-  title: string;
+  image: string;
+  name: string;
   description: string;
   attributes: AttributeSet[];
 };
 
 const createJson = (
-  imgUrl: string,
-  title: string,
+  image: string,
+  name: string,
   description: string,
   date: string,
   location: string,
@@ -39,8 +39,8 @@ const createJson = (
   minimum_attendance: string,
   ticket_is_used: string
 ): JsonObject => ({
-  imgUrl,
-  title,
+  image,
+  name,
   description,
   attributes: [
     {
@@ -74,18 +74,23 @@ const createJson = (
   ],
 });
 const ProjectCreatePage = () => {
-  const [title, setTitle] = useState('');
-  const titleRef = useRef<HTMLInputElement>(null);
+  const [name, setName] = useState('');
+  const nameRef = useRef<HTMLInputElement>(null);
   const [description, setDescription] = useState('');
   const descriptionRef = useRef<HTMLInputElement>(null);
-  const [imgUrl, setImgUrl] = useState('');
-  const imgUrlRef = useRef<HTMLInputElement>(null);
+  const [image, setImage] = useState('');
+  const imageRef = useRef<HTMLInputElement>(null);
   const [time, setTime] = useState('');
   const timeRef = useRef<HTMLInputElement>(null);
   const [location, setLocation] = useState('');
   const locationRef = useRef<HTMLInputElement>(null);
   const [date, setDate] = useState('');
   const dateRef = useRef<HTMLInputElement>(null);
+
+  const [simbol, setSimbol] = useState('');
+  const simbolRef = useRef<HTMLInputElement>(null);
+  const [cName, setCName] = useState('');
+  const cNameRef = useRef<HTMLInputElement>(null);
 
   const [seat, setSeat] = useState('');
   const seatRef = useRef<HTMLInputElement>(null);
@@ -115,27 +120,36 @@ const ProjectCreatePage = () => {
     e.preventDefault();
 
     if (
-      !title ||
+      !cName ||
+      !simbol ||
+      !name ||
       !date ||
       !location ||
       !seat ||
       !price ||
       !description ||
-      !imgUrl ||
+      !image ||
       !time ||
       !minimumAttendance ||
-      isNaN(Number(price))
+      isNaN(Number(price)) ||
+      isNaN(Number(minimumAttendance))
     ) {
       setTimeout(() => {
-        if (!title) {
+        if (!cName) {
+          setWarning('설명 문구를 적어 주세요');
+          cNameRef.current?.focus();
+        } else if (!simbol) {
+          setWarning('설명 문구를 적어 주세요');
+          simbolRef.current?.focus();
+        } else if (!name) {
           setWarning('프로젝트 명/제목을 적어 주세요');
-          titleRef.current?.focus();
+          nameRef.current?.focus();
         } else if (!description) {
           setWarning('설명 문구를 적어 주세요');
           descriptionRef.current?.focus();
-        } else if (!imgUrl) {
+        } else if (!image) {
           setWarning('이미지 uri을 적어 주세요');
-          imgUrlRef.current?.focus();
+          imageRef.current?.focus();
         } else if (!location) {
           setWarning('장소을 적어 주세요');
           locationRef.current?.focus();
@@ -157,6 +171,9 @@ const ProjectCreatePage = () => {
         } else if (!minimumAttendance) {
           setWarning('출석 일수를 적어 주세요');
           minimumAttendanceRef.current?.focus();
+        } else if (isNaN(Number(minimumAttendance))) {
+          minimumAttendanceRef.current?.focus();
+          setWarning('출석 일수를 숫자로 입력해주세요');
         }
       }, 0);
 
@@ -167,8 +184,8 @@ const ProjectCreatePage = () => {
     setNotUseJsonArray((prevState) => [
       ...prevState,
       createJson(
-        imgUrl,
-        title,
+        image,
+        name,
         description,
         date,
         location,
@@ -182,8 +199,8 @@ const ProjectCreatePage = () => {
     setUseJsonArray((prevState) => [
       ...prevState,
       createJson(
-        imgUrl,
-        title,
+        image,
+        name,
         description,
         date,
         location,
@@ -208,25 +225,45 @@ const ProjectCreatePage = () => {
       return newArray;
     });
   };
+  const jsonToFile = (json: object, filename: string): File => {
+    // JSON 객체를 Blob 객체로 변환
+    const jsonString = JSON.stringify(json);
+    const blob = new Blob([jsonString], { type: 'application/json' });
 
+    // Blob 객체에 파일 이름을 부여하여 File 객체로 변환
+    return new File([blob], filename, { type: 'application/json' });
+  };
   const addNewProject = async (event: React.FormEvent) => {
     event.preventDefault();
+
+    let tokenId: number[] = [];
+    let price: number[] = [];
+    let minCount: number[] = [];
+    const ticketNum = notUseJsonArray.length;
+    let uri = '';
+    const name = cName;
+    const symbol = simbol;
+
+    notUseJsonArray.map((v, i) => {
+      const findPrice = v.attributes.find((element) => {
+        return element.trait_type === 'Price';
+      })?.value;
+      const findminimum_attendance = v.attributes.find((element) => {
+        return element.trait_type === 'minimum_attendance';
+      })?.value;
+      tokenId.push(i + 1);
+      price.push(Number(findPrice));
+      minCount.push(Number(findminimum_attendance));
+    });
+
+    console.log(tokenId);
+    console.log(price);
+    console.log(minCount);
 
     if (notUseJsonArray.length <= 0) {
       setWarning('NFT정보가 1개 이상은 입력하셔야 합니다.');
       return;
     }
-
-    const jsonToFile = (json: object, filename: string): File => {
-      // JSON 객체를 Blob 객체로 변환
-      const jsonString = JSON.stringify(json);
-      const blob = new Blob([jsonString], { type: 'application/json' });
-
-      // Blob 객체에 파일 이름을 부여하여 File 객체로 변환
-      return new File([blob], filename, { type: 'application/json' });
-    };
-    console.log(notUseJsonArray);
-    console.log(useJsonArray);
 
     const form = new FormData();
 
@@ -241,29 +278,31 @@ const ProjectCreatePage = () => {
       );
     });
 
-    form.append('pinataMetadata', JSON.stringify({ name: 'test' }));
+    form.append('pinataMetadata', JSON.stringify({ name: cName }));
 
     form.append(
       'pinataOptions',
       JSON.stringify({ wrapWithDirectory: false, cidVersion: 0 })
     );
 
-    try {
-      const res = await axios.post(
-        'https://api.pinata.cloud/pinning/pinFileToIPFS',
-        form,
-        {
-          maxBodyLength: 'Infinity',
-          headers: {
-            'Content-Type': `multipart/form-data; boundary=${form._boundary}`,
-            Authorization: `Bearer ${pinataJwt}`,
-          },
-        }
-      );
-      console.log(res.data);
-    } catch (error) {
-      console.error(error);
-    }
+    // try {
+    //   const res = await axios.post(
+    //     'https://api.pinata.cloud/pinning/pinFileToIPFS',
+    //     form,
+    //     {
+    //       maxBodyLength: 'Infinity',
+    //       headers: {
+    //         'Content-Type': `multipart/form-data; boundary=${form._boundary}`,
+    //         Authorization: `Bearer ${pinataJwt}`,
+    //       },
+    //     }
+    //   );
+    //   setOpenDialog(false);
+    //   console.log(res.data.IpfsHash);
+    //   uri = res.data.IpfsHash;
+    // } catch (error) {
+    //   console.error(error);
+    // }
   };
 
   return (
@@ -273,10 +312,22 @@ const ProjectCreatePage = () => {
           <div className="text-[20px] self-start font-bold">프로젝트 정보</div>
           <div className="ml-8">
             <TitleWithInput
+              title="* NFT 이름 : "
+              placeholder="NFT 이름 (Link Ticket)"
+              ref={cNameRef}
+              onInputChange={setCName}
+            />
+            <TitleWithInput
+              title="* NFT SIMBOL : "
+              placeholder="NFT SIMBOL 입력 (LT)"
+              ref={simbolRef}
+              onInputChange={setSimbol}
+            />
+            <TitleWithInput
               title="* 프로젝트명 : "
               placeholder="프로젝트명 입력"
-              ref={titleRef}
-              onInputChange={setTitle}
+              ref={nameRef}
+              onInputChange={setName}
             />
             <TitleWithInput
               title="* 콘서트 설명 : "
@@ -285,10 +336,10 @@ const ProjectCreatePage = () => {
               onInputChange={setDescription}
             />
             <TitleWithInput
-              title="* 공통 imgUrl : "
+              title="* 공통 image : "
               placeholder="Image Url 입력"
-              ref={imgUrlRef}
-              onInputChange={setImgUrl}
+              ref={imageRef}
+              onInputChange={setImage}
             />
             <TitleWithInput
               title="* 장소 : "
@@ -303,8 +354,8 @@ const ProjectCreatePage = () => {
               onInputChange={setTime}
             />
             <TitleWithInput
-              title="* 일시 : "
-              placeholder="일시 입력(2000-01-01, 2000년01월01일)"
+              title="* 일정 : "
+              placeholder="일정 입력(2000-01-01, 2000년01월01일)"
               ref={dateRef}
               onInputChange={setDate}
             />
@@ -363,7 +414,7 @@ const ProjectCreatePage = () => {
             제출
           </div>
           <Dialog open={openDialog} onClose={handleClose}>
-            <DialogTitle>NFT 구매</DialogTitle>
+            <Dialogname>NFT 구매</Dialogname>
             <DialogContent>
               <DialogContentText>
                 당신은 {notUseJsonArray.length}개의 퀘스트를 NFT를 생성하게

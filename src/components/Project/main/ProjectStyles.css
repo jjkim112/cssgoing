@@ -17,9 +17,42 @@
   font: 30px bold;
 }
 
-.project-description {
+
+
+.project_ticket {
+  display: flex;
+  justify-content: center;
+  font: 40px bold;
+  padding: 20px 10px;
+}
+
+.project_ticket_use {
+  background-color: green;
+  width: 20rem;
+  height: 50px;
+  font-size: 30px;
+  line-height: 50px;
   text-align: center;
-  font: 25px;
+  border-radius: 10px;
+  color: white;
+  margin: 5px 10px;
+  /* 가운데 정렬 */
+  border: 1px solid #000000;
+
+}
+
+.project_ticket_nuUse {
+  background-color: red;
+  width: 20rem;
+  height: 50px;
+  font-size: 30px;
+  line-height: 50px;
+  text-align: center;
+  border-radius: 10px;
+  color: white;
+  margin: 5px 10px;
+  /* 가운데 정렬 */
+  border: 1px solid #000000;
 }
 
 .project-img {

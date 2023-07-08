@@ -2,6 +2,8 @@
 @tailwind components;
 @tailwind utilities;
 
+body {}
+
 .inner {
   width: 1240px;
 }
@@ -31,4 +33,17 @@
     width: 440px;
 
   }
+}
+
+
+
+
+.main_contentTitle {
+  background-color: inherit;
+  font-weight: 500;
+  font-size: 36px;
+  line-height: 45px;
+  color: rgb(0, 0, 0);
+  padding-top: 20px;
+
 }
