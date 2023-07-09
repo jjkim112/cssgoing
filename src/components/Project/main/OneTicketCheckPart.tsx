@@ -61,7 +61,16 @@ function OneTicketCheckPart({
               {ticketUse ? '본 인 증  명  됨' : '본인 소유 아님'}
             </div>
           </div>
-
+          <div className="project_ticket">
+            티켓 사용 유/무 :
+            <div
+              className={
+                ticketUse ? 'project_ticket_nuUse' : 'project_ticket_use'
+              }
+            >
+              {ticketUse ? '사용 됨' : '사용 전'}
+            </div>
+          </div>
           <div
             className="project-minting my-4"
             onClick={() => {

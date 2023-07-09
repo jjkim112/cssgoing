@@ -3,7 +3,7 @@ import React, { FC, ReactNode } from 'react';
 import Link from 'next/link';
 import './HeaderStyles.css';
 import Image from 'next/image';
-import { ethereum } from '@/lib/web3.config';
+import { GOERLI_CHAIN_ID, ethereum, web3 } from '@/lib/web3.config';
 import { useContext } from 'react';
 import { AppContext } from '@/app/layout';
 import useSWR from 'swr';
@@ -18,12 +18,19 @@ const HeaderCustom: FC<HeaderProps> = () => {
     try {
       const accounts = await ethereum?.request({
         method: 'eth_requestAccounts',
-        params: [],
       });
 
-      setAccount(accounts[0]);
+      if (parseInt(ethereum?.networkVersion) !== GOERLI_CHAIN_ID) {
+        await ethereum?.request({
+          method: 'wallet_switchEthereumChain',
+          params: [{ chainId: web3.utils.toHex(GOERLI_CHAIN_ID) }],
+        });
+        setAccount(accounts[0]);
+      } else {
+        setAccount(accounts[0]);
+      }
     } catch (error) {
-      console.log(error);
+      console.error(error);
     }
   };
   return (
