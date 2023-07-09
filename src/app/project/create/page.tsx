@@ -4,7 +4,7 @@ import OneMetadataItem from '@/components/Project/create/OneMetadataItem';
 import TitleWithInput from '@/components/Project/create/TitleWithInput';
 
 import axios from 'axios';
-import { useState, useRef } from 'react';
+import { useState, useRef, useContext } from 'react';
 import FormData from 'form-data';
 
 import Dialog from '@mui/material/Dialog';
@@ -13,6 +13,8 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import Dialogname from '@mui/material/DialogTitle';
 import Button from '@mui/material/Button';
+import { questContract } from '@/lib/web3.config';
+import { AppContext } from '@/app/layout';
 const pinataJwt = process.env.NEXT_PUBLIC_JWT;
 
 type AttributeSet = {
@@ -74,6 +76,7 @@ const createJson = (
   ],
 });
 const ProjectCreatePage = () => {
+  const { account, setAccount } = useContext(AppContext);
   const [name, setName] = useState('');
   const nameRef = useRef<HTMLInputElement>(null);
   const [description, setDescription] = useState('');
@@ -107,6 +110,7 @@ const ProjectCreatePage = () => {
   const [openDialog, setOpenDialog] = useState<boolean>(false);
 
   // const [count, setCount] = useState<number[]>([]);
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleClickOpen = () => {
     setOpenDialog(true);
@@ -284,25 +288,50 @@ const ProjectCreatePage = () => {
       'pinataOptions',
       JSON.stringify({ wrapWithDirectory: false, cidVersion: 0 })
     );
+    setIsLoading(true);
+    try {
+      const res = await axios.post(
+        'https://api.pinata.cloud/pinning/pinFileToIPFS',
+        form,
+        {
+          maxBodyLength: 'Infinity',
+          headers: {
+            'Content-Type': `multipart/form-data; boundary=${form._boundary}`,
+            Authorization: `Bearer ${pinataJwt}`,
+          },
+        }
+      );
 
-    // try {
-    //   const res = await axios.post(
-    //     'https://api.pinata.cloud/pinning/pinFileToIPFS',
-    //     form,
-    //     {
-    //       maxBodyLength: 'Infinity',
-    //       headers: {
-    //         'Content-Type': `multipart/form-data; boundary=${form._boundary}`,
-    //         Authorization: `Bearer ${pinataJwt}`,
-    //       },
-    //     }
-    //   );
-    //   setOpenDialog(false);
-    //   console.log(res.data.IpfsHash);
-    //   uri = res.data.IpfsHash;
-    // } catch (error) {
-    //   console.error(error);
-    // }
+      console.log(res.data.IpfsHash);
+      console.log(tokenId);
+      console.log(price);
+      console.log(minCount);
+      console.log(ticketNum);
+      console.log(name);
+      console.log(symbol);
+      uri = res.data.IpfsHash;
+      const response = await questContract.methods
+        .makeTicketContract(
+          tokenId,
+          price,
+          minCount,
+          ticketNum,
+          uri,
+          name,
+          symbol
+        )
+        .send({
+          from: account,
+        });
+      setOpenDialog(false);
+      setIsLoading(false);
+      console.log(response);
+      console.log(typeof response);
+    } catch (error) {
+      setOpenDialog(false);
+      setIsLoading(false);
+      console.error(error);
+    }
   };
 
   return (
@@ -434,10 +463,14 @@ const ProjectCreatePage = () => {
                 )}
               </DialogContentText>
             </DialogContent>
-            <DialogActions>
-              <Button onClick={handleClose}>취소</Button>
-              <Button onClick={addNewProject}>민팅</Button>
-            </DialogActions>
+            {isLoading ? (
+              <div>Loading...</div>
+            ) : (
+              <DialogActions>
+                <Button onClick={handleClose}>취소</Button>
+                <Button onClick={addNewProject}>민팅</Button>
+              </DialogActions>
+            )}
           </Dialog>
         </div>
       </div>
