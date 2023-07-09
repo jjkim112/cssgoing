@@ -7,7 +7,6 @@ import {
   ethereum,
   questContract,
   web3,
-  TICKET_NFT_ADDRESS,
   ticketContract,
 } from "@/lib/web3.config";
 
@@ -68,6 +67,15 @@ export const attendancePointCheck = async (t_addr: string, account: string) => {
   }
 };
 
+export const ownerOfTokenId = async (t_addr: string, id: number) => {
+  try {
+    const response = await ticketContract(t_addr).methods.ownerOf(id).call();
+    return response;
+  } catch (error) {
+    console.error(error);
+    return null;
+  }
+};
 export const getMyLastTimeOfAttendance = async (
   t_addr: string,
   account: string
@@ -87,7 +95,7 @@ export const getWholeTicketContractList = async () => {
     const response = await questContract.methods
       .getWholeTicketContractsList()
       .call();
-    return Array(response).map((v) => String(v));
+    return response;
     // console.log(ticketContractList);
     // console.log(ticketContractList[0]);
     //티컨만들어진 리스트중에 제일 첫번째꺼로 실험하기위해 유즈스테이트에 이렇게 등록해놧당
@@ -113,6 +121,68 @@ export const ticketBuying = async (
     console.log(response);
   } catch (error) {
     console.error(error);
+  }
+};
+
+export const getTicketContractUri = async (t_addr: string) => {
+  try {
+    //여기서 티켓컨트랙트 주소가 정의 되어있어야한다 배포한 이후의 티켓 어드레스!! 컨트랙트(티컨주소,티컨abi)=ticketcontract
+    const response = await ticketContract(t_addr).methods.uri1().call();
+    return response;
+  } catch (error) {
+    console.error(error);
+    return null;
+  }
+};
+
+export const getMyProjects = async (account: string) => {
+  try {
+    const response = await questContract.methods.getMyProjects().call({
+      from: account,
+    });
+    return response;
+  } catch (error) {
+    console.error(error);
+    return null;
+  }
+};
+export const getMyTickets = async (t_addr: string, account: string) => {
+  try {
+    //여기서 티켓컨트랙트 주소가 정의 되어있어야한다 배포한 이후의 티켓 어드레스!! 컨트랙트(티컨주소,티컨abi)=ticketcontract
+    const response = await ticketContract(t_addr)
+      .methods.getUserTicketsInfo()
+      .call({
+        from: account,
+      });
+    return response;
+  } catch (error) {
+    console.error(error);
+    return null;
+  }
+};
+
+export const getWholeTicketList = async (t_addr: string) => {
+  try {
+    //여기서 티켓컨트랙트 주소가 정의 되어있어야한다 배포한 이후의 티켓 어드레스!! 컨트랙트(티컨주소,티컨abi)=ticketcontract
+    const response = await ticketContract(t_addr)
+      .methods.getAllTokenIdsConsideringSelling()
+      .call();
+    return response;
+  } catch (error) {
+    console.error(error);
+    return null;
+  }
+};
+export const getWholeTicketNum = async (t_addr: string) => {
+  try {
+    //여기서 티켓컨트랙트 주소가 정의 되어있어야한다 배포한 이후의 티켓 어드레스!! 컨트랙트(티컨주소,티컨abi)=ticketcontract
+    const response = await ticketContract(t_addr)
+      .methods.getAllTokenIdsNumber()
+      .call();
+    return { whole: Number(response["0"]), remain: Number(response["1"]) };
+  } catch (error) {
+    console.error(error);
+    return { whole: null, remain: null };
   }
 };
 
@@ -143,6 +213,70 @@ export const makeTicketContract = async (
     return response;
   } catch (error) {
     console.log(error);
+    return null;
+  }
+};
+
+export const transactionTracking = async (
+  targetTokenId: number,
+  t_addr: string,
+  targetReceiverAddress: string
+) => {
+  let transferCount = 0;
+  let lastReceiver = null;
+
+  const options = {
+    filter: {
+      tokenId: targetTokenId,
+    },
+    fromBlock: 0,
+    toBlock: "latest",
+  };
+
+  try {
+    const events = await ticketContract(t_addr).getPastEvents(
+      "Transfer",
+      options
+    );
+
+    for (const event of events) {
+      const { from, to, tokenId } = event.returnValues;
+
+      if (tokenId == targetTokenId) {
+        transferCount++;
+        lastReceiver = to;
+      }
+    }
+
+    if (transferCount >= 3) {
+      return false;
+    } else if (
+      lastReceiver.toLowerCase() === targetReceiverAddress.toLowerCase() &&
+      transferCount == 2
+    ) {
+      return true;
+    }
+    return false;
+  } catch (error) {
+    console.error(error);
+    return false;
+  }
+};
+
+export const processTicketUsing = async (
+  t_addr: string,
+  account: string,
+  tokenId: number
+) => {
+  try {
+    const response = await ticketContract(t_addr)
+      .methods.ticketUsed(tokenId)
+      .send({
+        from: account,
+      });
+    return response;
+  } catch (error) {
+    console.error(error);
     return null;
   }
 };

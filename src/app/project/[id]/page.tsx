@@ -17,32 +17,25 @@ export default function ProjectId() {
 
   const initAct = async () => {
     if (id) {
+      await updateTickets(id);
       const project = getProject(id);
       console.log(project);
       if (project !== null) {
         setOneProjectData(project!);
       }
-      await updateTickets(id);
       console.log("update success!!");
     }
   };
   useEffect(() => {
     initAct();
-  });
+  }, []);
 
   return (
     <div className="bg-white">
-      {id != null ? (
-        oneProjectData != null ? (
-          <OneProjectPart projectData={oneProjectData} />
-        ) : (
-          <OneProjectPart projectData={null} />
-        )
+      {id != null && oneProjectData !== null ? (
+        <OneProjectPart projectData={oneProjectData} />
       ) : (
-        <>
-          <ProjectCreateButton />
-          <ProjectThumbCompound />
-        </>
+        <></>
       )}
     </div>
   );

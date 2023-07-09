@@ -1,13 +1,21 @@
-'use client';
-import React, { ReactNode, useEffect, useState } from 'react';
-import './ProjectStyles.css';
+"use client";
+import React, { ReactNode, useEffect, useState, useContext } from "react";
+import "./ProjectStyles.css";
 
-import Dialog from '@mui/material/Dialog';
-import DialogActions from '@mui/material/DialogActions';
-import DialogContent from '@mui/material/DialogContent';
-import DialogContentText from '@mui/material/DialogContentText';
-import DialogTitle from '@mui/material/DialogTitle';
-import Button from '@mui/material/Button';
+import Dialog from "@mui/material/Dialog";
+import DialogActions from "@mui/material/DialogActions";
+import DialogContent from "@mui/material/DialogContent";
+import DialogContentText from "@mui/material/DialogContentText";
+import DialogTitle from "@mui/material/DialogTitle";
+import Button from "@mui/material/Button";
+import { OneProject } from "@/domain/OneProject";
+import { OneTicket } from "@/domain/OneTicket";
+import {
+  ownerOfTokenId,
+  processTicketUsing,
+  transactionTracking,
+} from "@/utils/web3/web3_v2";
+import { AppContext } from "@/app/layout";
 
 export interface ProjectData {
   id: number;
@@ -27,15 +35,54 @@ export type TicketType = {
 };
 
 interface OneProjectPartProps {
-  projectData: ProjectData | null;
+  projectData: OneProject;
+  ticketData: OneTicket;
 }
 
 function OneTicketCheckPart({
   projectData,
+  ticketData,
   ...restProps
 }: OneProjectPartProps) {
+  const { account } = useContext(AppContext);
   const [openDialog, setOpenDialog] = useState<boolean>(false);
-  const [ticketUse, setTicketUse] = useState<boolean>(false);
+
+  const [isOwner, setIsOwner] = useState<boolean>(false);
+  const [validUse, setValidUse] = useState<boolean>(false);
+
+  const checkOwner = async () => {
+    const response: string =
+      (await ownerOfTokenId(projectData.contract, ticketData.id)) ?? "";
+    if (response.toLowerCase() === account.toLowerCase()) {
+      setIsOwner(true);
+    }
+  };
+  const checkValidTicket = async () => {
+    const response: boolean = await transactionTracking(
+      ticketData.id,
+      projectData.contract,
+      account
+    );
+    setValidUse(response);
+  };
+
+  useEffect(() => {
+    checkOwner();
+    checkValidTicket();
+  }, []);
+
+  const useTicketClick = async () => {
+    const response = await processTicketUsing(
+      projectData.contract,
+      account,
+      ticketData.id
+    );
+    console.log("useTicketClick");
+    console.log(response);
+    checkValidTicket();
+    setOpenDialog(false);
+  };
+
   const handleClickOpen = () => {
     setOpenDialog(true);
   };
@@ -52,33 +99,20 @@ function OneTicketCheckPart({
           <div className="project-title">{projectData.title}</div>
           <div className="project-description">{projectData.description}</div>
           <div className="project_ticket">
-            첫 소유주 :
-            <div
-              className={
-                ticketUse ? 'project_ticket_use' : 'project_ticket_nuUse'
-              }
-            >
-              {ticketUse ? '본 인 증  명  됨' : '본인 소유 아님'}
-            </div>
+            {isOwner && validUse && !ticketData.ticket_is_used ? (
+              <div
+                className="project_ticket_use hover:cursor-pointer"
+                onClick={() => {
+                  handleClickOpen();
+                }}
+              >
+                티켓 사용 가능
+              </div>
+            ) : (
+              <div className="project_ticket_nuUse">사용 불가 티켓</div>
+            )}
           </div>
-          <div className="project_ticket">
-            티켓 사용 유/무 :
-            <div
-              className={
-                ticketUse ? 'project_ticket_nuUse' : 'project_ticket_use'
-              }
-            >
-              {ticketUse ? '사용 됨' : '사용 전'}
-            </div>
-          </div>
-          <div
-            className="project-minting my-4"
-            onClick={() => {
-              handleClickOpen();
-            }}
-          >
-            티켓 사용/입장 하기
-          </div>
+
           <Dialog open={openDialog} onClose={handleClose}>
             <DialogTitle>티켓 사용/입장 하기</DialogTitle>
             <DialogContent>
@@ -88,7 +122,7 @@ function OneTicketCheckPart({
             </DialogContent>
             <DialogActions>
               <Button onClick={handleClose}>취소</Button>
-              <Button onClick={handleClose}>사용/입장</Button>
+              <Button onClick={useTicketClick}>사용/입장</Button>
             </DialogActions>
           </Dialog>
         </div>

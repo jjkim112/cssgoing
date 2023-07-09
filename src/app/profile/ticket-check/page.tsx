@@ -1,49 +1,51 @@
-'use client';
-import { useEffect, useState } from 'react';
+"use client";
+import { useEffect, useState } from "react";
 
 // import projectMockData from "@/mock-data/v0/projects.json";
-import projectMockData from '@/mock-data/v1/projects.json';
+import projectMockData from "@/mock-data/v1/projects.json";
 import OneProjectPart, {
   ProjectData,
-} from '@/components/Project/main/OneProjectPart';
-import ProjectCreateButton from '@/components/Project/main/ProjectCreateButton';
-import ProjectThumbCompound from '@/compounds/ProjectThumbCompound';
-import { useSearchParams } from 'next/navigation';
-import OneTicketCheckPart from '@/components/Project/main/OneTicketCheckPart';
+} from "@/components/Project/main/OneProjectPart";
+import ProjectCreateButton from "@/components/Project/main/ProjectCreateButton";
+import ProjectThumbCompound from "@/compounds/ProjectThumbCompound";
+import { useSearchParams } from "next/navigation";
+import OneTicketCheckPart from "@/components/Project/main/OneTicketCheckPart";
+import { OneProject } from "@/domain/OneProject";
+import { OneTicket } from "@/domain/OneTicket";
+import { useTicketProjectList } from "@/context/contractContext";
 
 export default function TicketCheck() {
   const params = useSearchParams();
-  console.log(params.get('contract'));
+  const ticketIdStr = params.get("id") ?? "";
+  const t_addr = params.get("contract") ?? "";
+  const [oneProjectData, setOneProjectData] = useState<OneProject | null>(null);
+  const [oneTicketData, setOneTicketData] = useState<OneTicket | null>(null);
 
-  const id = params.get('id');
-  const [oneProjectData, setOneProjectData] = useState<ProjectData | null>(
-    null
-  );
-  useEffect(() => {
-    if (id) {
-      console.log('id exist!!');
-      for (let index = 0; index < projectMockData.length; index++) {
-        if (projectMockData[index].id == Number(id)) {
-          setOneProjectData(projectMockData[index]);
-          break;
-        }
-      }
+  const { getProject, getTicket } = useTicketProjectList();
+
+  const initSet = async () => {
+    const tempProject = getProject(t_addr);
+    const tempTicket = await getTicket(t_addr, ticketIdStr);
+    if (tempProject !== null && tempTicket !== null) {
+      setOneProjectData(tempProject);
+      setOneTicketData(tempTicket);
     }
-  });
+  };
+  useEffect(() => {
+    initSet();
+  }, []);
 
   return (
     <div className="bg-white">
-      {id != null ? (
-        oneProjectData != null ? (
-          <OneTicketCheckPart projectData={oneProjectData} />
-        ) : (
-          <OneTicketCheckPart projectData={null} />
-        )
+      {ticketIdStr !== null &&
+      oneProjectData !== null &&
+      oneTicketData !== null ? (
+        <OneTicketCheckPart
+          projectData={oneProjectData}
+          ticketData={oneTicketData}
+        />
       ) : (
-        <>
-          <ProjectCreateButton />
-          <ProjectThumbCompound />
-        </>
+        <></>
       )}
     </div>
   );

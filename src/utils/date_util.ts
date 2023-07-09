@@ -1,5 +1,5 @@
-// export const oneDayDateNumber = 1000 * 60 * 60 * 24;
-export const oneDayDateNumber = 1000 * 6;
+export const oneDayDateNumber = 1000 * 60 * 60 * 24;
+// export const oneDayDateNumber = 1000 * 6;
 
 export const dateToStr: (date: Date) => string = (date) => {
   const year: number = date.getFullYear();

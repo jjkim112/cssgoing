@@ -310,7 +310,9 @@ const ProjectCreatePage = () => {
       console.log(ticketNum);
       console.log(name);
       console.log(symbol);
-      uri = res.data.IpfsHash;
+      uri =
+        "https://gold-alleged-yak-272.mypinata.cloud/ipfs/" + res.data.IpfsHash;
+
       const response = await makeTicketContract(
         tokenId,
         price,

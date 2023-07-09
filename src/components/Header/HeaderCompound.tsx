@@ -9,7 +9,15 @@ import { AppContext } from "@/app/layout";
 import useSWR from "swr";
 import { useTicketProjectList } from "@/context/contractContext";
 import { OneProject } from "@/domain/OneProject";
-import { getWholeTicketContractList, onClickLogin } from "@/utils/web3/web3_v2";
+import {
+  getMyProjects,
+  getMyTickets,
+  getTicketContractUri,
+  getWholeTicketContractList,
+  getWholeTicketList,
+  getWholeTicketNum,
+  onClickLogin,
+} from "@/utils/web3/web3_v2";
 interface HeaderProps {
   className?: string;
   children?: ReactNode;
@@ -17,8 +25,10 @@ interface HeaderProps {
 
 const HeaderCustom: FC<HeaderProps> = () => {
   const { account, setAccount } = useContext(AppContext);
-  const onClickLogIn = async () => {
+
+  const clickWalletLogin = async () => {
     const walletAddr = await onClickLogin();
+
     if (walletAddr !== null) {
       setAccount(walletAddr);
     }
@@ -28,18 +38,39 @@ const HeaderCustom: FC<HeaderProps> = () => {
     useTicketProjectList();
 
   const testFunc1 = async () => {
-    await updateProjects(["1234", "2345"]);
-    console.log("finish");
+    const res = await getMyProjects(account);
+    console.log("getMyProjects");
+    console.log(res);
   };
 
   const testFunc2 = async () => {
-    await updateTickets("1234");
-    console.log("finish");
+    const res = await getTicketContractUri(
+      "0xa77fe9Ce610137Ad382299eEb0528BAb55430128"
+    );
+    console.log("getTicketContractUri");
+    console.log(res);
   };
   const testFunc3 = async () => {
-    const addrs = await getWholeTicketContractList();
-    console.log("addrs");
-    console.log(addrs);
+    const res = await getMyTickets(
+      "0xa77fe9Ce610137Ad382299eEb0528BAb55430128",
+      account
+    );
+    console.log("getMyTickets");
+    console.log(res);
+  };
+  const testFunc4 = async () => {
+    const res = await getWholeTicketList(
+      "0xa77fe9Ce610137Ad382299eEb0528BAb55430128"
+    );
+    console.log("getWholeTicketList");
+    console.log(res);
+  };
+  const testFunc5 = async () => {
+    const res = await getWholeTicketNum(
+      "0xa77fe9Ce610137Ad382299eEb0528BAb55430128"
+    );
+    console.log("getWholeTicketNum");
+    console.log(res);
   };
   useEffect(() => {
     const temp: OneProject | null = getProject("1234");
@@ -66,22 +97,13 @@ const HeaderCustom: FC<HeaderProps> = () => {
           <Link href="/profile">
             <div className="header-menu-item">프로필</div>
           </Link>
-          <div onClick={testFunc1}>
-            <div className="header-menu-item">테스트 버튼1</div>
-          </div>
-          <div onClick={testFunc2}>
-            <div className="header-menu-item">테스트 버튼2</div>
-          </div>
-          <div onClick={testFunc3}>
-            <div className="header-menu-item">테스트 버튼3</div>
-          </div>
         </nav>
         {account ? (
           <div className="connect-wallet-button">
             {account.substring(0, 4)}...{account.substring(account.length - 4)}
           </div>
         ) : (
-          <button className="connect-wallet-button" onClick={onClickLogIn}>
+          <button className="connect-wallet-button" onClick={clickWalletLogin}>
             Connect Wallet
           </button>
         )}

@@ -34,7 +34,8 @@ export class OneTicket {
     webData: any,
     tAddr: string,
     id: number,
-    isSell?: boolean
+    isSell: boolean,
+    isUsed: boolean
   ): OneTicket {
     return {
       contract: tAddr,
@@ -48,8 +49,7 @@ export class OneTicket {
       minimum_attendance:
         Number(getVFromAttr("minimum_attendance", webData.attributes ?? [])) ??
         -1,
-      ticket_is_used:
-        getVFromAttr("minimum_attendance", webData.attributes ?? []) === "true",
+      ticket_is_used: isUsed,
     };
   }
 }
