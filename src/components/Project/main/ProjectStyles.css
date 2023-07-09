@@ -17,8 +17,6 @@
   font: 30px bold;
 }
 
-
-
 .project_ticket {
   display: flex;
   justify-content: center;
@@ -38,7 +36,6 @@
   margin: 5px 10px;
   /* 가운데 정렬 */
   border: 1px solid #000000;
-
 }
 
 .project_ticket_nuUse {
@@ -67,6 +64,18 @@
 }
 
 .project-minting {
+  margin: 10px auto;
+  display: flex;
+  width: 180px;
+  height: 40px;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid gray;
+  color: gray;
+  border-radius: 20px;
+  font: 16px bold gray;
+}
+.project-minting-active {
   margin: 10px auto;
   display: flex;
   width: 180px;

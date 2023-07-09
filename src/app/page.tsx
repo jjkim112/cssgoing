@@ -10,7 +10,8 @@ const Home: NextPage = () => {
 
   const updateProjectsList = async () => {
     const ticketAddresses = await getWholeTicketContractList();
-    updateProjects(ticketAddresses);
+    await updateProjects(ticketAddresses);
+    console.log("update Whole Project Success!!");
   };
 
   useEffect(() => {

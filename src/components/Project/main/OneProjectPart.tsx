@@ -24,6 +24,7 @@ import {
 } from "@/utils/web3/web3_v2";
 import { AppContext } from "@/app/layout";
 import { OneTicket } from "@/domain/OneTicket";
+import { OneProject } from "@/domain/OneProject";
 
 // export interface ProjectData {
 //   id: number;
@@ -33,25 +34,9 @@ import { OneTicket } from "@/domain/OneTicket";
 //   imgUrl: string;
 //   quests: Quest[];
 // }
-export interface ProjectData {
-  id: number;
-  contract: string;
-  title: string;
-  description: string;
-  imgUrl: string;
-  tickets: TicketType[];
-}
-
-export type TicketType = {
-  id: number; // tokenId
-  seat: string;
-  price: string;
-  minimum_attendance: number;
-  ticket_is_used: boolean;
-};
 
 interface OneProjectPartProps {
-  projectData: ProjectData;
+  projectData: OneProject | null;
 }
 
 function OneProjectPart({ projectData, ...restProps }: OneProjectPartProps) {
@@ -77,7 +62,7 @@ function OneProjectPart({ projectData, ...restProps }: OneProjectPartProps) {
       const response = await ticketBuying(
         pickTicket.id,
         pickTicket.price,
-        projectData.contract,
+        projectData!.contract,
         account
       );
       // TODO response 성공/실패 확인
@@ -101,12 +86,12 @@ function OneProjectPart({ projectData, ...restProps }: OneProjectPartProps) {
   const clickAttendance = async () => {
     if (nowTime >= lastCheckTime) {
       // TODO await attendance 함수 실행
-      const response = await attendance(projectData.contract, account);
+      const response = await attendance(projectData!.contract, account);
       // TODO await get User Attendance 함수 호출
       if (true) {
         // response 가 성공적일때
         const attendenceNum = await attendancePointCheck(
-          projectData.contract,
+          projectData!.contract,
           account
         );
         if (attendenceNum !== null) {
@@ -118,7 +103,7 @@ function OneProjectPart({ projectData, ...restProps }: OneProjectPartProps) {
       // setCount((v) => v + 1);
       // TODO await get Last Check Time 함수 호출
       const lastCheckTime = await getMyLastTimeOfAttendance(
-        projectData.contract,
+        projectData!.contract,
         account
       );
       console.log("lastCheckTime");
@@ -133,7 +118,7 @@ function OneProjectPart({ projectData, ...restProps }: OneProjectPartProps) {
     return value;
   };
 
-  if (projectData) {
+  if (projectData !== null) {
     return (
       <div className="w-full flex justify-center">
         <div className="inner">
@@ -174,10 +159,19 @@ function OneProjectPart({ projectData, ...restProps }: OneProjectPartProps) {
               </div>
             </div>
           )}
-
-          <div className="project-minting my-4" onClick={clickPurchaseBtn}>
-            티켓 구매하기
-          </div>
+          {pickTicket === null ? (
+            <div className="project-minting my-4">티켓 구매하기</div>
+          ) : (
+            <div
+              className="project-minting-active my-4"
+              onClick={clickPurchaseBtn}
+            >
+              티켓 구매하기{" "}
+              {`가격 : ${pickTicket && pickTicket.price}, 좌석 : ${
+                pickTicket && pickTicket.seat
+              }`}
+            </div>
+          )}
           <Dialog open={openDialog} onClose={handleClose}>
             <DialogTitle>NFT 구매</DialogTitle>
             <DialogContent>
@@ -188,7 +182,9 @@ function OneProjectPart({ projectData, ...restProps }: OneProjectPartProps) {
             </DialogContent>
             <DialogActions>
               <Button onClick={handleClose}>취소</Button>
-              <Button onClick={purchaseTicket}>구매(가격:ㅁㅁ)</Button>
+              <Button onClick={purchaseTicket}>{`구매(가격:${
+                pickTicket && pickTicket.price
+              })`}</Button>
             </DialogActions>
           </Dialog>
         </div>

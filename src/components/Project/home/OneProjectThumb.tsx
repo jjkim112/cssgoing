@@ -1,7 +1,6 @@
 import React from "react";
 import "./ProjectThumbStyles.css";
 import Link from "next/link";
-import { TicketType } from "../main/OneProjectPart";
 import { OneTicket } from "@/domain/OneTicket";
 
 interface OneProjectThumbProps {

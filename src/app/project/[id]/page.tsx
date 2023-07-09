@@ -3,29 +3,31 @@ import { useEffect, useState } from "react";
 
 // import projectMockData from "@/mock-data/v0/projects.json";
 import projectMockData from "@/mock-data/v1/projects.json";
-import OneProjectPart, {
-  ProjectData,
-} from "@/components/Project/main/OneProjectPart";
 import ProjectCreateButton from "@/components/Project/main/ProjectCreateButton";
 import ProjectThumbCompound from "@/compounds/ProjectThumbCompound";
 import { usePathname } from "next/navigation";
+import { useTicketProjectList } from "@/context/contractContext";
+import { OneProject } from "@/domain/OneProject";
+import OneProjectPart from "@/components/Project/main/OneProjectPart";
 
 export default function ProjectId() {
   const id = usePathname()?.substring(9);
-  console.log(id);
-  const [oneProjectData, setOneProjectData] = useState<ProjectData | null>(
-    null
-  );
-  useEffect(() => {
+  const [oneProjectData, setOneProjectData] = useState<OneProject | null>(null);
+  const { getProject, updateTickets } = useTicketProjectList();
+
+  const initAct = async () => {
     if (id) {
-      console.log("id exist!!");
-      for (let index = 0; index < projectMockData.length; index++) {
-        if (projectMockData[index].id == Number(id)) {
-          setOneProjectData(projectMockData[index]);
-          break;
-        }
+      const project = getProject(id);
+      console.log(project);
+      if (project !== null) {
+        setOneProjectData(project!);
       }
+      await updateTickets(id);
+      console.log("update success!!");
     }
+  };
+  useEffect(() => {
+    initAct();
   });
 
   return (
