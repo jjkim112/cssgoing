@@ -1,12 +1,14 @@
-'use client';
-import React, { FC, ReactNode } from 'react';
-import Link from 'next/link';
-import './HeaderStyles.css';
-import Image from 'next/image';
-import { ethereum } from '@/lib/web3.config';
-import { useContext } from 'react';
-import { AppContext } from '@/app/layout';
-import useSWR from 'swr';
+"use client";
+import React, { FC, ReactNode, useEffect } from "react";
+import Link from "next/link";
+import "./HeaderStyles.css";
+import Image from "next/image";
+import { ethereum } from "@/lib/web3.config";
+import { useContext } from "react";
+import { AppContext } from "@/app/layout";
+import useSWR from "swr";
+import { useTicketProjectList } from "@/context/contractContext";
+import { OneProject } from "@/domain/OneProject";
 interface HeaderProps {
   className?: string;
   children?: ReactNode;
@@ -17,7 +19,7 @@ const HeaderCustom: FC<HeaderProps> = () => {
   const onClickLogIn = async () => {
     try {
       const accounts = await ethereum?.request({
-        method: 'eth_requestAccounts',
+        method: "eth_requestAccounts",
         params: [],
       });
 
@@ -26,6 +28,28 @@ const HeaderCustom: FC<HeaderProps> = () => {
       console.log(error);
     }
   };
+
+  const { updateProjects, updateTickets, getProject, projects } =
+    useTicketProjectList();
+
+  const testFunc1 = async () => {
+    await updateProjects(["1234", "2345"]);
+    console.log("finish");
+  };
+
+  const testFunc2 = async () => {
+    await updateTickets("1234");
+    console.log("finish");
+  };
+  const testFunc3 = async () => {
+    const temp = await getProject("1234");
+    console.log(temp);
+  };
+  useEffect(() => {
+    const temp: OneProject | null = getProject("1234");
+    console.log(temp);
+  }, [projects]);
+
   return (
     <div className="header_inner  ">
       <header className="header-wrapper-home inner">
@@ -46,6 +70,15 @@ const HeaderCustom: FC<HeaderProps> = () => {
           <Link href="/profile">
             <div className="header-menu-item">프로필</div>
           </Link>
+          <div onClick={testFunc1}>
+            <div className="header-menu-item">테스트 버튼1</div>
+          </div>
+          <div onClick={testFunc2}>
+            <div className="header-menu-item">테스트 버튼2</div>
+          </div>
+          <div onClick={testFunc3}>
+            <div className="header-menu-item">테스트 버튼3</div>
+          </div>
         </nav>
         {account ? (
           <div className="connect-wallet-button">

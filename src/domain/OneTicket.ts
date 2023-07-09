@@ -2,7 +2,7 @@ import { getVFromAttr } from "./OneProject";
 
 export class OneTicket {
   contract: string;
-  id: number;
+  id: string;
   imgUrl: string;
   isSell: boolean;
   seat: string;
@@ -12,7 +12,7 @@ export class OneTicket {
 
   constructor(
     contract: string,
-    id: number,
+    id: string,
     imgUrl: string,
     isSell: boolean,
     seat: string,
@@ -33,25 +33,23 @@ export class OneTicket {
   static fromWebData(
     webData: any,
     tAddr: string,
-    id: number,
+    id: string,
     isSell?: boolean
   ): OneTicket {
     return {
       contract: tAddr,
       id: id,
       imgUrl:
-        webData.data.image ??
+        webData.image ??
         "https://cdn-icons-png.flaticon.com/512/7693/7693271.png",
       isSell: isSell ?? true,
-      seat: getVFromAttr("Seat", webData.data.attributes ?? []) ?? "no seat",
-      price: Number(getVFromAttr("Price", webData.data.attributes ?? [])) ?? -1,
+      seat: getVFromAttr("Seat", webData.attributes ?? []) ?? "no seat",
+      price: Number(getVFromAttr("Price", webData.attributes ?? [])) ?? -1,
       minimum_attendance:
-        Number(
-          getVFromAttr("minimum_attendance", webData.data.attributes ?? [])
-        ) ?? -1,
+        Number(getVFromAttr("minimum_attendance", webData.attributes ?? [])) ??
+        -1,
       ticket_is_used:
-        getVFromAttr("minimum_attendance", webData.data.attributes ?? []) ===
-        "true",
+        getVFromAttr("minimum_attendance", webData.attributes ?? []) === "true",
     };
   }
 }

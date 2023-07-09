@@ -28,6 +28,7 @@
     "ethers": "^6.6.2",
     "form-data": "^4.0.0",
     "fs": "^0.0.1-security",
+    "http-proxy-middleware": "^2.0.6",
     "next": "13.4.7",
     "next-connect": "^1.0.0",
     "pinata-upload-cli": "^1.1.0",

@@ -1,18 +1,12 @@
 [
   {
     "address": "1234",
-    "urls": [
-      "https://gold-alleged-yak-272.mypinata.cloud/ipfs/QmU1kyYpFKqawrrHX6J94DfJEBMPT3uanVDW71BP7XGdYY/1.json",
-      "https://gold-alleged-yak-272.mypinata.cloud/ipfs/QmU1kyYpFKqawrrHX6J94DfJEBMPT3uanVDW71BP7XGdYY/2.json",
-      "https://gold-alleged-yak-272.mypinata.cloud/ipfs/QmU1kyYpFKqawrrHX6J94DfJEBMPT3uanVDW71BP7XGdYY/3.json"
-    ]
+    "metadataUrl": "https://gold-alleged-yak-272.mypinata.cloud/ipfs/QmRKUVwWmJR25iS9kzzyFxa8cS8gZPWhjfJS18AGz2Bn1r/",
+    "ids": ["1", "2_sell", "3"]
   },
   {
     "address": "2345",
-    "urls": [
-      "https://gold-alleged-yak-272.mypinata.cloud/ipfs/Qmem34fLt8v3poDJDqQ4Qu3mjroPa2Hmr9xwhVidgWRtYn/1.json",
-      "https://gold-alleged-yak-272.mypinata.cloud/ipfs/Qmem34fLt8v3poDJDqQ4Qu3mjroPa2Hmr9xwhVidgWRtYn/2.json",
-      "https://gold-alleged-yak-272.mypinata.cloud/ipfs/Qmem34fLt8v3poDJDqQ4Qu3mjroPa2Hmr9xwhVidgWRtYn/3.json"
-    ]
+    "metadataUrl": "https://gold-alleged-yak-272.mypinata.cloud/ipfs/QmazLYnSTgUMdBwip3wUrcbMcpmLApTDDVJGQDY6JP565x/",
+    "ids": ["1", "2", "3"]
   }
 ]
