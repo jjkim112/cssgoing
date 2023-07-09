@@ -65,6 +65,8 @@ export default function TicketProjectListProvider({
         tempProjects.push(OneProject.fromWebData(jsonData, t_addr));
       }
     }
+    console.log("update projects part");
+    console.log(tempProjects);
     setProjects(tempProjects);
   };
 
@@ -137,7 +139,7 @@ export default function TicketProjectListProvider({
               // };
             }
             ticketList.push(
-              OneTicket.fromWebData(jsonData, t_addr, ticketId, isSell)
+              OneTicket.fromWebData(jsonData, t_addr, Number(ticketId), isSell)
             );
           }
           oneProject.tickets = ticketList;

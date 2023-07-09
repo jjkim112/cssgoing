@@ -1,20 +1,21 @@
-'use client';
+"use client";
 
-import OneMetadataItem from '@/components/Project/create/OneMetadataItem';
-import TitleWithInput from '@/components/Project/create/TitleWithInput';
+import OneMetadataItem from "@/components/Project/create/OneMetadataItem";
+import TitleWithInput from "@/components/Project/create/TitleWithInput";
 
-import axios from 'axios';
-import { useState, useRef, useContext } from 'react';
-import FormData from 'form-data';
+import axios from "axios";
+import { useState, useRef, useContext } from "react";
+import FormData from "form-data";
 
-import Dialog from '@mui/material/Dialog';
-import DialogActions from '@mui/material/DialogActions';
-import DialogContent from '@mui/material/DialogContent';
-import DialogContentText from '@mui/material/DialogContentText';
-import Dialogname from '@mui/material/DialogTitle';
-import Button from '@mui/material/Button';
-import { questContract } from '@/lib/web3.config';
-import { AppContext } from '@/app/layout';
+import Dialog from "@mui/material/Dialog";
+import DialogActions from "@mui/material/DialogActions";
+import DialogContent from "@mui/material/DialogContent";
+import DialogContentText from "@mui/material/DialogContentText";
+import Dialogname from "@mui/material/DialogTitle";
+import Button from "@mui/material/Button";
+import { questContract } from "@/lib/web3.config";
+import { AppContext } from "@/app/layout";
+import { makeTicketContract } from "@/utils/web3/web3_v2";
 const pinataJwt = process.env.NEXT_PUBLIC_JWT;
 
 type AttributeSet = {
@@ -46,63 +47,63 @@ const createJson = (
   description,
   attributes: [
     {
-      trait_type: 'Date',
+      trait_type: "Date",
       value: date,
     },
     {
-      trait_type: 'Location',
+      trait_type: "Location",
       value: location,
     },
     {
-      trait_type: 'Seat',
+      trait_type: "Seat",
       value: seat,
     },
     {
-      trait_type: 'Price',
+      trait_type: "Price",
       value: price,
     },
     {
-      trait_type: 'RunningTime',
+      trait_type: "RunningTime",
       value: time,
     },
     {
-      trait_type: 'ticket_is_used',
+      trait_type: "ticket_is_used",
       value: ticket_is_used,
     },
     {
-      trait_type: 'minimum_attendance',
+      trait_type: "minimum_attendance",
       value: minimum_attendance,
     },
   ],
 });
 const ProjectCreatePage = () => {
   const { account, setAccount } = useContext(AppContext);
-  const [name, setName] = useState('');
+  const [name, setName] = useState("");
   const nameRef = useRef<HTMLInputElement>(null);
-  const [description, setDescription] = useState('');
+  const [description, setDescription] = useState("");
   const descriptionRef = useRef<HTMLInputElement>(null);
-  const [image, setImage] = useState('');
+  const [image, setImage] = useState("");
   const imageRef = useRef<HTMLInputElement>(null);
-  const [time, setTime] = useState('');
+  const [time, setTime] = useState("");
   const timeRef = useRef<HTMLInputElement>(null);
-  const [location, setLocation] = useState('');
+  const [location, setLocation] = useState("");
   const locationRef = useRef<HTMLInputElement>(null);
-  const [date, setDate] = useState('');
+  const [date, setDate] = useState("");
   const dateRef = useRef<HTMLInputElement>(null);
 
-  const [simbol, setSimbol] = useState('');
+  const [simbol, setSimbol] = useState("");
   const simbolRef = useRef<HTMLInputElement>(null);
-  const [cName, setCName] = useState('');
+  const [cName, setCName] = useState("");
   const cNameRef = useRef<HTMLInputElement>(null);
 
-  const [seat, setSeat] = useState('');
+  const [seat, setSeat] = useState("");
   const seatRef = useRef<HTMLInputElement>(null);
-  const [price, setPrice] = useState('');
+  const [price, setPrice] = useState("");
   const priceRef = useRef<HTMLInputElement>(null);
-  const [minimumAttendance, setMinimumAttendance] = useState('');
+  const [minimumAttendance, setMinimumAttendance] = useState("");
   const minimumAttendanceRef = useRef<HTMLInputElement>(null);
 
-  const [warning, setWarning] = useState<string>('');
+  const [warning, setWarning] = useState<string>("");
 
   const [notUseJsonArray, setNotUseJsonArray] = useState<JsonObject[]>([]);
   const [useJsonArray, setUseJsonArray] = useState<JsonObject[]>([]);
@@ -140,51 +141,51 @@ const ProjectCreatePage = () => {
     ) {
       setTimeout(() => {
         if (!cName) {
-          setWarning('설명 문구를 적어 주세요');
+          setWarning("설명 문구를 적어 주세요");
           cNameRef.current?.focus();
         } else if (!simbol) {
-          setWarning('설명 문구를 적어 주세요');
+          setWarning("설명 문구를 적어 주세요");
           simbolRef.current?.focus();
         } else if (!name) {
-          setWarning('프로젝트 명/제목을 적어 주세요');
+          setWarning("프로젝트 명/제목을 적어 주세요");
           nameRef.current?.focus();
         } else if (!description) {
-          setWarning('설명 문구를 적어 주세요');
+          setWarning("설명 문구를 적어 주세요");
           descriptionRef.current?.focus();
         } else if (!image) {
-          setWarning('이미지 uri을 적어 주세요');
+          setWarning("이미지 uri을 적어 주세요");
           imageRef.current?.focus();
         } else if (!location) {
-          setWarning('장소을 적어 주세요');
+          setWarning("장소을 적어 주세요");
           locationRef.current?.focus();
         } else if (!time) {
-          setWarning('시간을 적어 주세요');
+          setWarning("시간을 적어 주세요");
           timeRef.current?.focus();
         } else if (!date) {
-          setWarning('일정을 적어 주세요');
+          setWarning("일정을 적어 주세요");
           dateRef.current?.focus();
         } else if (!price) {
-          setWarning('가격을 적어 주세요');
+          setWarning("가격을 적어 주세요");
           priceRef.current?.focus();
         } else if (isNaN(Number(price))) {
           priceRef.current?.focus();
-          setWarning('가격은 숫자를 입력해주세요');
+          setWarning("가격은 숫자를 입력해주세요");
         } else if (!seat) {
-          setWarning('좌석을 적어 주세요');
+          setWarning("좌석을 적어 주세요");
           seatRef.current?.focus();
         } else if (!minimumAttendance) {
-          setWarning('출석 일수를 적어 주세요');
+          setWarning("출석 일수를 적어 주세요");
           minimumAttendanceRef.current?.focus();
         } else if (isNaN(Number(minimumAttendance))) {
           minimumAttendanceRef.current?.focus();
-          setWarning('출석 일수를 숫자로 입력해주세요');
+          setWarning("출석 일수를 숫자로 입력해주세요");
         }
       }, 0);
 
       return;
     }
 
-    setWarning('');
+    setWarning("");
     setNotUseJsonArray((prevState) => [
       ...prevState,
       createJson(
@@ -197,7 +198,7 @@ const ProjectCreatePage = () => {
         price,
         time,
         minimumAttendance,
-        'false'
+        "false"
       ),
     ]);
     setUseJsonArray((prevState) => [
@@ -212,7 +213,7 @@ const ProjectCreatePage = () => {
         price,
         time,
         minimumAttendance,
-        'true'
+        "true"
       ),
     ]);
   };
@@ -232,10 +233,10 @@ const ProjectCreatePage = () => {
   const jsonToFile = (json: object, filename: string): File => {
     // JSON 객체를 Blob 객체로 변환
     const jsonString = JSON.stringify(json);
-    const blob = new Blob([jsonString], { type: 'application/json' });
+    const blob = new Blob([jsonString], { type: "application/json" });
 
     // Blob 객체에 파일 이름을 부여하여 File 객체로 변환
-    return new File([blob], filename, { type: 'application/json' });
+    return new File([blob], filename, { type: "application/json" });
   };
   const addNewProject = async (event: React.FormEvent) => {
     event.preventDefault();
@@ -244,16 +245,16 @@ const ProjectCreatePage = () => {
     let price: number[] = [];
     let minCount: number[] = [];
     const ticketNum = notUseJsonArray.length;
-    let uri = '';
+    let uri = "";
     const name = cName;
     const symbol = simbol;
 
     notUseJsonArray.map((v, i) => {
       const findPrice = v.attributes.find((element) => {
-        return element.trait_type === 'Price';
+        return element.trait_type === "Price";
       })?.value;
       const findminimum_attendance = v.attributes.find((element) => {
-        return element.trait_type === 'minimum_attendance';
+        return element.trait_type === "minimum_attendance";
       })?.value;
       tokenId.push(i + 1);
       price.push(Number(findPrice));
@@ -265,38 +266,38 @@ const ProjectCreatePage = () => {
     console.log(minCount);
 
     if (notUseJsonArray.length <= 0) {
-      setWarning('NFT정보가 1개 이상은 입력하셔야 합니다.');
+      setWarning("NFT정보가 1개 이상은 입력하셔야 합니다.");
       return;
     }
 
     const form = new FormData();
 
     notUseJsonArray.map((v, i) => {
-      form.append('file', jsonToFile(v, `${i + 1}.json`), `data/${i + 1}.json`);
+      form.append("file", jsonToFile(v, `${i + 1}.json`), `data/${i + 1}.json`);
     });
     useJsonArray.map((v, i) => {
       form.append(
-        'file',
+        "file",
         jsonToFile(v, `${i + 1}_use.json`),
         `data/${i + 1}_use.json`
       );
     });
 
-    form.append('pinataMetadata', JSON.stringify({ name: cName }));
+    form.append("pinataMetadata", JSON.stringify({ name: cName }));
 
     form.append(
-      'pinataOptions',
+      "pinataOptions",
       JSON.stringify({ wrapWithDirectory: false, cidVersion: 0 })
     );
     setIsLoading(true);
     try {
       const res = await axios.post(
-        'https://api.pinata.cloud/pinning/pinFileToIPFS',
+        "https://api.pinata.cloud/pinning/pinFileToIPFS",
         form,
         {
-          maxBodyLength: 'Infinity',
+          maxBodyLength: "Infinity",
           headers: {
-            'Content-Type': `multipart/form-data; boundary=${form._boundary}`,
+            "Content-Type": `multipart/form-data; boundary=${form._boundary}`,
             Authorization: `Bearer ${pinataJwt}`,
           },
         }
@@ -310,23 +311,22 @@ const ProjectCreatePage = () => {
       console.log(name);
       console.log(symbol);
       uri = res.data.IpfsHash;
-      const response = await questContract.methods
-        .makeTicketContract(
-          tokenId,
-          price,
-          minCount,
-          ticketNum,
-          uri,
-          name,
-          symbol
-        )
-        .send({
-          from: account,
-        });
-      setOpenDialog(false);
-      setIsLoading(false);
-      console.log(response);
-      console.log(typeof response);
+      const response = await makeTicketContract(
+        tokenId,
+        price,
+        minCount,
+        ticketNum,
+        uri,
+        name,
+        symbol,
+        account
+      );
+      if (response !== null) {
+        setOpenDialog(false);
+        setIsLoading(false);
+        console.log(response);
+        console.log(typeof response);
+      }
     } catch (error) {
       setOpenDialog(false);
       setIsLoading(false);
@@ -417,7 +417,7 @@ const ProjectCreatePage = () => {
           >
             개별정보 추가 +
           </button>
-          {warning && <p style={{ color: 'red' }}>{warning}</p>}
+          {warning && <p style={{ color: "red" }}>{warning}</p>}
           <div className="text-[12px] mt-8 mb-4">
             개수 : {notUseJsonArray.length}개
           </div>
@@ -435,7 +435,7 @@ const ProjectCreatePage = () => {
                 />
               ))}
           </div>
-          {warning && <p style={{ color: 'red' }}>{warning}</p>}
+          {warning && <p style={{ color: "red" }}>{warning}</p>}
           <div
             className="flex justify-center items-center my-4 border-[1px] border-black w-full h-8 rounded-full hover:cursor-pointer hover:bg-red-300"
             onClick={handleClickOpen}
@@ -451,13 +451,13 @@ const ProjectCreatePage = () => {
               </DialogContentText>
 
               <DialogContentText>
-                <span style={{ color: 'red' }}>내용 및 입력 값을</span> 잘
+                <span style={{ color: "red" }}>내용 및 입력 값을</span> 잘
                 확인하고 적어 주시기바랍니다.
                 <br />
                 <br />
                 <br />
                 {notUseJsonArray.length <= 0 && (
-                  <p style={{ color: 'red' }}>
+                  <p style={{ color: "red" }}>
                     민팅할수 있는 정보가 존재 하지 않습니다.
                   </p>
                 )}

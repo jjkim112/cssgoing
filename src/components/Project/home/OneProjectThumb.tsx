@@ -1,19 +1,18 @@
-import React from 'react';
-import './ProjectThumbStyles.css';
-import Link from 'next/link';
-import { TicketType } from '../main/OneProjectPart';
+import React from "react";
+import "./ProjectThumbStyles.css";
+import Link from "next/link";
+import { TicketType } from "../main/OneProjectPart";
+import { OneTicket } from "@/domain/OneTicket";
 
 interface OneProjectThumbProps {
-  id: number;
   contract: string;
   title: string;
   description: string;
   imgUrl: string;
-  tickets: TicketType[];
+  tickets: OneTicket[];
 }
 
 function OneProjectThumb({
-  id,
   contract,
   description,
   title,
@@ -21,7 +20,10 @@ function OneProjectThumb({
   tickets,
 }: OneProjectThumbProps) {
   return (
-    <Link href={`/project/${id}`} className="thumb-card hover:cursor-pointer">
+    <Link
+      href={`/project/${contract}`}
+      className="thumb-card hover:cursor-pointer"
+    >
       <img className="thumb-card-img" src={imgUrl} alt="" />
       <div className=" p-3">
         <div className="thumb-card-title pb-2  ">{title}</div>

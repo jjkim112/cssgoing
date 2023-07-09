@@ -9,6 +9,7 @@ import { AppContext } from "@/app/layout";
 import useSWR from "swr";
 import { useTicketProjectList } from "@/context/contractContext";
 import { OneProject } from "@/domain/OneProject";
+import { getWholeTicketContractList, onClickLogin } from "@/utils/web3/web3_v2";
 interface HeaderProps {
   className?: string;
   children?: ReactNode;
@@ -17,22 +18,9 @@ interface HeaderProps {
 const HeaderCustom: FC<HeaderProps> = () => {
   const { account, setAccount } = useContext(AppContext);
   const onClickLogIn = async () => {
-    try {
-      const accounts = await ethereum?.request({
-        method: "eth_requestAccounts",
-      });
-
-      if (parseInt(ethereum?.networkVersion) !== GOERLI_CHAIN_ID) {
-        await ethereum?.request({
-          method: "wallet_switchEthereumChain",
-          params: [{ chainId: web3.utils.toHex(GOERLI_CHAIN_ID) }],
-        });
-        setAccount(accounts[0]);
-      } else {
-        setAccount(accounts[0]);
-      }
-    } catch (error) {
-      console.error(error);
+    const walletAddr = await onClickLogin();
+    if (walletAddr !== null) {
+      setAccount(walletAddr);
     }
   };
 
@@ -49,8 +37,9 @@ const HeaderCustom: FC<HeaderProps> = () => {
     console.log("finish");
   };
   const testFunc3 = async () => {
-    const temp = await getProject("1234");
-    console.log(temp);
+    const addrs = await getWholeTicketContractList();
+    console.log("addrs");
+    console.log(addrs);
   };
   useEffect(() => {
     const temp: OneProject | null = getProject("1234");

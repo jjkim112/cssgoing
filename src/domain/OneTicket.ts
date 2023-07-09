@@ -2,7 +2,7 @@ import { getVFromAttr } from "./OneProject";
 
 export class OneTicket {
   contract: string;
-  id: string;
+  id: number;
   imgUrl: string;
   isSell: boolean;
   seat: string;
@@ -12,7 +12,7 @@ export class OneTicket {
 
   constructor(
     contract: string,
-    id: string,
+    id: number,
     imgUrl: string,
     isSell: boolean,
     seat: string,
@@ -33,7 +33,7 @@ export class OneTicket {
   static fromWebData(
     webData: any,
     tAddr: string,
-    id: string,
+    id: number,
     isSell?: boolean
   ): OneTicket {
     return {
