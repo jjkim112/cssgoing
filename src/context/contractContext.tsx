@@ -44,22 +44,22 @@ export default function TicketProjectListProvider({
         const ticketUrl = metadataUrl + "1.json";
         let jsonData = fromCache(ticketUrl);
         if (jsonData === undefined) {
-          jsonData = {
-            image:
-              "https://file2.nocutnews.co.kr/newsroom/image/2022/04/18/202204181135176917_0.jpg",
-            name: "나훈아",
-            description: "나훈아 20주년 콘서",
-            attributes: [
-              { trait_type: "Date", value: "2023년 07월 08일" },
-              { trait_type: "Location", value: "제주 아트홀" },
-              { trait_type: "Seat", value: "1-A" },
-              { trait_type: "Price", value: "500000" },
-              { trait_type: "RunningTime", value: "20:00~22:00" },
-              { trait_type: "ticket_is_used", value: "false" },
-              { trait_type: "minimum_attendance", value: "1" },
-            ],
-          };
-          // jsonData = await axios.get(ticketUrl);
+          jsonData = await axios.get(ticketUrl);
+          // jsonData = {
+          //   image:
+          //     "https://file2.nocutnews.co.kr/newsroom/image/2022/04/18/202204181135176917_0.jpg",
+          //   name: "나훈아",
+          //   description: "나훈아 20주년 콘서",
+          //   attributes: [
+          //     { trait_type: "Date", value: "2023년 07월 08일" },
+          //     { trait_type: "Location", value: "제주 아트홀" },
+          //     { trait_type: "Seat", value: "1-A" },
+          //     { trait_type: "Price", value: "500000" },
+          //     { trait_type: "RunningTime", value: "20:00~22:00" },
+          //     { trait_type: "ticket_is_used", value: "false" },
+          //     { trait_type: "minimum_attendance", value: "1" },
+          //   ],
+          // };
           urlCache.set(ticketUrl, jsonData);
         }
         tempProjects.push(OneProject.fromWebData(jsonData, t_addr));
@@ -119,22 +119,22 @@ export default function TicketProjectListProvider({
 
             let jsonData = fromCache(url);
             if (jsonData === undefined) {
-              // jsonData = await axios.get(url);
-              jsonData = {
-                image:
-                  "https://file2.nocutnews.co.kr/newsroom/image/2022/04/18/202204181135176917_0.jpg",
-                name: "나훈아",
-                description: "나훈아 20주년 콘서",
-                attributes: [
-                  { trait_type: "Date", value: "2023년 07월 08일" },
-                  { trait_type: "Location", value: "제주 아트홀" },
-                  { trait_type: "Seat", value: "1-A" },
-                  { trait_type: "Price", value: "500000" },
-                  { trait_type: "RunningTime", value: "20:00~22:00" },
-                  { trait_type: "ticket_is_used", value: "false" },
-                  { trait_type: "minimum_attendance", value: "1" },
-                ],
-              };
+              jsonData = await axios.get(url);
+              // jsonData = {
+              //   image:
+              //     "https://file2.nocutnews.co.kr/newsroom/image/2022/04/18/202204181135176917_0.jpg",
+              //   name: "나훈아",
+              //   description: "나훈아 20주년 콘서",
+              //   attributes: [
+              //     { trait_type: "Date", value: "2023년 07월 08일" },
+              //     { trait_type: "Location", value: "제주 아트홀" },
+              //     { trait_type: "Seat", value: "1-A" },
+              //     { trait_type: "Price", value: "500000" },
+              //     { trait_type: "RunningTime", value: "20:00~22:00" },
+              //     { trait_type: "ticket_is_used", value: "false" },
+              //     { trait_type: "minimum_attendance", value: "1" },
+              //   ],
+              // };
             }
             ticketList.push(
               OneTicket.fromWebData(jsonData, t_addr, ticketId, isSell)
