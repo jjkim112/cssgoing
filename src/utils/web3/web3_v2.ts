@@ -13,6 +13,8 @@ export const onClickLogin = async () => {
     const accounts = await ethereum?.request({
       method: 'eth_requestAccounts',
     });
+    console.log('onClickLogin');
+    console.log(accounts);
 
     //  @ts-expect-error
     if (parseInt(ethereum?.networkVersion) !== GOERLI_CHAIN_ID) {
@@ -21,6 +23,9 @@ export const onClickLogin = async () => {
         params: [{ chainId: web3.utils.toHex(GOERLI_CHAIN_ID) }],
       });
     }
+    console.log('onClickLogin');
+    //  @ts-expect-error
+    console.log(accounts[0]);
     //  @ts-expect-error
     return accounts[0];
   } catch (error) {

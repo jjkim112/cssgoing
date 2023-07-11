@@ -96,7 +96,7 @@ function OneTicketCheckPart({
     return (
       <div className="w-full flex justify-center">
         <div className="inner">
-          <img className="project-img" src={projectData.imgUrl} alt="" />
+          <img className="project-img" src={ticketData.imgUrl} alt="" />
           <div className="project-title">{projectData.title}</div>
           <div className="project-description">{projectData.description}</div>
           <div className="project_ticket">

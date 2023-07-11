@@ -12,6 +12,8 @@ export default function TicketCheck() {
   const params = useSearchParams();
   const ticketIdStr = params.get('id') ?? '';
   const t_addr = params.get('contract') ?? '';
+  console.log(ticketIdStr);
+  console.log(t_addr);
   const [oneProjectData, setOneProjectData] = useState<OneProject | null>(null);
   const [oneTicketData, setOneTicketData] = useState<OneTicket | null>(null);
 

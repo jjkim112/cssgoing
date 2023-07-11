@@ -1,9 +1,9 @@
-"use client";
-import React, { useState, useEffect, useContext } from "react";
-import "./ProjectThumbStyles.css";
-import Link from "next/link";
-import { transactionTracking } from "@/utils/web3/web3_v2";
-import { AppContext } from "@/app/layout";
+'use client';
+import React, { useState, useEffect, useContext } from 'react';
+import './ProjectThumbStyles.css';
+import Link from 'next/link';
+import { transactionTracking } from '@/utils/web3/web3_v2';
+import { AppContext } from '@/app/layout';
 
 interface OneProjectThumbProps {
   id: number;
@@ -30,8 +30,8 @@ function TicketProjectCheck({
 
   return (
     <Link
-      href={`/profile/ticket-check?id=${id}${
-        isUsed ? "_use" : ""
+      href={`/profile/ticket-check?id=${
+        isUsed ? `${id}_use` : `${id}`
       }&contract=${contract}`}
       className="thumb-card hover:cursor-pointer"
     >
