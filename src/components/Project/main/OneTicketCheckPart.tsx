@@ -1,21 +1,21 @@
-"use client";
-import React, { ReactNode, useEffect, useState, useContext } from "react";
-import "./ProjectStyles.css";
+'use client';
+import React, { useEffect, useState, useContext } from 'react';
+import './ProjectStyles.css';
 
-import Dialog from "@mui/material/Dialog";
-import DialogActions from "@mui/material/DialogActions";
-import DialogContent from "@mui/material/DialogContent";
-import DialogContentText from "@mui/material/DialogContentText";
-import DialogTitle from "@mui/material/DialogTitle";
-import Button from "@mui/material/Button";
-import { OneProject } from "@/domain/OneProject";
-import { OneTicket } from "@/domain/OneTicket";
+import Dialog from '@mui/material/Dialog';
+import DialogActions from '@mui/material/DialogActions';
+import DialogContent from '@mui/material/DialogContent';
+import DialogContentText from '@mui/material/DialogContentText';
+import DialogTitle from '@mui/material/DialogTitle';
+import Button from '@mui/material/Button';
+import { OneProject } from '@/domain/OneProject';
+import { OneTicket } from '@/domain/OneTicket';
 import {
   ownerOfTokenId,
   processTicketUsing,
   transactionTracking,
-} from "@/utils/web3/web3_v2";
-import { AppContext } from "@/app/layout";
+} from '@/utils/web3/web3_v2';
+import { AppContext } from '@/app/layout';
 
 export interface ProjectData {
   id: number;
@@ -51,8 +51,9 @@ function OneTicketCheckPart({
   const [validUse, setValidUse] = useState<boolean>(false);
 
   const checkOwner = async () => {
-    const response: string =
-      (await ownerOfTokenId(projectData.contract, ticketData.id)) ?? "";
+    const response =
+      (await ownerOfTokenId(projectData.contract, ticketData.id)) ?? '';
+    if (typeof response !== 'string') return;
     if (response.toLowerCase() === account.toLowerCase()) {
       setIsOwner(true);
     }
@@ -77,7 +78,7 @@ function OneTicketCheckPart({
       account,
       ticketData.id
     );
-    console.log("useTicketClick");
+    console.log('useTicketClick');
     console.log(response);
     checkValidTicket();
     setOpenDialog(false);

@@ -1,30 +1,27 @@
-"use client";
-import React, { ReactNode, useEffect, useState, useContext } from "react";
-import "./ProjectStyles.css";
-import OneQuestPart, { Quest } from "./OneQuestPart";
-
-import Dialog from "@mui/material/Dialog";
-import DialogActions from "@mui/material/DialogActions";
-import DialogContent from "@mui/material/DialogContent";
-import DialogContentText from "@mui/material/DialogContentText";
-import DialogTitle from "@mui/material/DialogTitle";
-import Button from "@mui/material/Button";
-import OneTicketThumb from "./OneTicketThumb";
+'use client';
+import React, { useEffect, useState, useContext } from 'react';
+import './ProjectStyles.css';
+import Dialog from '@mui/material/Dialog';
+import DialogActions from '@mui/material/DialogActions';
+import DialogContent from '@mui/material/DialogContent';
+import DialogContentText from '@mui/material/DialogContentText';
+import DialogTitle from '@mui/material/DialogTitle';
+import Button from '@mui/material/Button';
+import OneTicketThumb from './OneTicketThumb';
 import {
-  dateToStr,
   dateToStrEng,
   msToPeriodStrEng,
   oneDayDateNumber,
-} from "@/utils/date_util";
+} from '@/utils/date_util';
 import {
   attendance,
   attendancePointCheck,
   getMyLastTimeOfAttendance,
   ticketBuying,
-} from "@/utils/web3/web3_v2";
-import { AppContext } from "@/app/layout";
-import { OneTicket } from "@/domain/OneTicket";
-import { OneProject } from "@/domain/OneProject";
+} from '@/utils/web3/web3_v2';
+import { AppContext } from '@/app/layout';
+import { OneTicket } from '@/domain/OneTicket';
+import { OneProject } from '@/domain/OneProject';
 
 // export interface ProjectData {
 //   id: number;
@@ -48,7 +45,7 @@ function OneProjectPart({ projectData, ...restProps }: OneProjectPartProps) {
   function ticketClick(ticketId: number) {
     // 클릭한 카드의 ID에 따라 상태값 변경
     setSelectedId(ticketId === selectedId ? null : ticketId);
-    console.log("Clicked Ticket : " + ticketId);
+    console.log('Clicked Ticket : ' + ticketId);
   }
 
   // const [count, setCount] = useState<number[]>([]);
@@ -85,7 +82,7 @@ function OneProjectPart({ projectData, ...restProps }: OneProjectPartProps) {
           temp.contract,
           account
         );
-        console.log("구매 함수 구매함수!!!!");
+        console.log('구매 함수 구매함수!!!!');
         console.log(response);
       } else {
       }
@@ -110,7 +107,7 @@ function OneProjectPart({ projectData, ...restProps }: OneProjectPartProps) {
       account
     );
     if (attendenceNum !== null) {
-      console.log("count set as " + attendenceNum);
+      console.log('count set as ' + attendenceNum);
       setCount(attendenceNum);
     }
     console.log(attendenceNum);
@@ -121,8 +118,8 @@ function OneProjectPart({ projectData, ...restProps }: OneProjectPartProps) {
       projectData!.contract,
       account
     );
-    console.log("lastCheckTime");
-    console.log(new Date(blockTimeToNextJSTime(lastCheckTime)));
+    console.log('lastCheckTime');
+
     if (lastCheckTime !== null) {
       setLastCheckTime(blockTimeToNextJSTime(lastCheckTime));
       // setLastCheckTime((v) => Date.now() + 10000);
