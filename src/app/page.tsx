@@ -1,5 +1,5 @@
 'use client';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { NextPage } from 'next';
 import ProjectThumbCompount from '@/compounds/ProjectThumbCompound';
 import { useTicketProjectList } from '@/context/contractContext';

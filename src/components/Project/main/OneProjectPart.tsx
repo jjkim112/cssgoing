@@ -23,15 +23,6 @@ import { AppContext } from '@/app/layout';
 import { OneTicket } from '@/domain/OneTicket';
 import { OneProject } from '@/domain/OneProject';
 
-// export interface ProjectData {
-//   id: number;
-//   contract: string;
-//   title: string;
-//   description: string;
-//   imgUrl: string;
-//   quests: Quest[];
-// }
-
 interface OneProjectPartProps {
   projectData: OneProject | null;
 }
@@ -169,28 +160,32 @@ function OneProjectPart({ projectData, ...restProps }: OneProjectPartProps) {
           <div className="flex flex-wrap justify-center my-3 w-[80%] mx-auto text-[20px]">
             출석일 수 : {count}
           </div>
-          {nowTime > lastCheckTime + oneDayDateNumber ? (
-            <div
-              className="flex flex-col justify-center items-center mx-auto hover:cursor-pointer border-[1px] border-black rounded-3xl w-[300px] py-2 text-center"
-              onClick={clickAttendance}
-            >
-              <div className="text-[18px] font-bold mb-1">출석하기</div>
-              {lastCheckTime !== 0 ? (
-                <div className="text-[12px] text-gray-300">{`최근 출석 : ${dateToStrEng(
-                  new Date(lastCheckTime)
-                )}`}</div>
-              ) : null}
-              {/* <div className="text-[12px] text-gray-300">{`최근 출석 : ${dateToStrEng(
+          {account ? (
+            nowTime > lastCheckTime + oneDayDateNumber ? (
+              <div
+                className="flex flex-col justify-center items-center mx-auto hover:cursor-pointer border-[1px] border-black rounded-3xl w-[300px] py-2 text-center"
+                onClick={clickAttendance}
+              >
+                <div className="text-[18px] font-bold mb-1">출석하기</div>
+                {lastCheckTime !== 0 ? (
+                  <div className="text-[12px] text-gray-300">{`최근 출석 : ${dateToStrEng(
+                    new Date(lastCheckTime)
+                  )}`}</div>
+                ) : null}
+                {/* <div className="text-[12px] text-gray-300">{`최근 출석 : ${dateToStrEng(
                 new Date(lastCheckTime)
               )}`}</div> */}
-            </div>
-          ) : (
-            <div className="flex justify-center mx-auto border-[1px] border-black rounded-3xl w-[300px] py-2 text-center">
-              <div className="mr-[4px]">남은 시간 : </div>
-              <div className="text-red-500">
-                {msToPeriodStrEng(lastCheckTime + oneDayDateNumber - nowTime)}
               </div>
-            </div>
+            ) : (
+              <div className="flex justify-center mx-auto border-[1px] border-black rounded-3xl w-[300px] py-2 text-center">
+                <div className="mr-[4px]">남은 시간 : </div>
+                <div className="text-red-500">
+                  {msToPeriodStrEng(lastCheckTime + oneDayDateNumber - nowTime)}
+                </div>
+              </div>
+            )
+          ) : (
+            <div></div>
           )}
           {selectedId === null ? (
             <div className="project-minting my-4">티켓 구매하기</div>

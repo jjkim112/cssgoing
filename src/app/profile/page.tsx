@@ -7,6 +7,8 @@ import { getMyProjects, getMyTickets } from '@/utils/web3/web3_v2';
 import { useTicketProjectList } from '@/context/contractContext';
 import OneProjectThumb from '@/components/Project/home/OneProjectThumb';
 import TicketProjectCheck from '@/components/Project/home/TicketProjectCheck';
+import LoginDialog from '@/compounds/Redirect';
+import { redirect } from 'next/navigation';
 
 export default function profile() {
   const { account } = useContext(AppContext);
@@ -57,6 +59,9 @@ export default function profile() {
     initMyProjects();
   }, []);
 
+  if (!account) {
+    return redirect('/');
+  }
   return (
     <div className="w-full flex justify-center">
       <div className="inner">

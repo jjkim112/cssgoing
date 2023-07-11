@@ -3,11 +3,12 @@ import React, { FC, ReactNode, useEffect } from 'react';
 import Link from 'next/link';
 import './HeaderStyles.css';
 import Image from 'next/image';
-import { useContext } from 'react';
+import { useContext, useState } from 'react';
 import { AppContext } from '@/app/layout';
 import { useTicketProjectList } from '@/context/contractContext';
 import { OneProject } from '@/domain/OneProject';
 import { onClickLogin } from '@/utils/web3/web3_v2';
+import LoginDialog from '@/compounds/Redirect';
 interface HeaderProps {
   className?: string;
   children?: ReactNode;
@@ -15,6 +16,7 @@ interface HeaderProps {
 
 const HeaderCustom: FC<HeaderProps> = () => {
   const { account, setAccount } = useContext(AppContext);
+  const [openDialog, setOpenDialog] = useState<boolean>(false);
 
   const clickWalletLogin = async () => {
     const walletAddr = await onClickLogin();
@@ -48,9 +50,27 @@ const HeaderCustom: FC<HeaderProps> = () => {
           <Link href="/project">
             <div className="header-menu-item">프로젝트</div>
           </Link>
-          <Link href="/profile">
-            <div className="header-menu-item">프로필</div>
-          </Link>
+          {account ? (
+            <Link href="/profile">
+              <div className="header-menu-item">프로필</div>
+            </Link>
+          ) : (
+            <>
+              <button
+                className="header-menu-item"
+                onClick={() => {
+                  setOpenDialog(true);
+                }}
+              >
+                프로필
+              </button>
+              <LoginDialog
+                title="프로필 페이지는"
+                openDialog={openDialog}
+                setOpenDialog={setOpenDialog}
+              ></LoginDialog>
+            </>
+          )}
         </nav>
         {account ? (
           <div className="connect-wallet-button">
