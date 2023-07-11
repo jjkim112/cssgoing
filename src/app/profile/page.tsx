@@ -1,14 +1,12 @@
-"use client";
-import ProjectThumbCompound from "@/compounds/ProjectThumbCompound";
-import ProjectTicketCheckCompound from "@/compounds/ProjectTicketCheckCompound";
-import React, { useContext, useState, useEffect } from "react";
-import { AppContext } from "../layout";
-import { OneProject } from "@/domain/OneProject";
-import { OneTicket } from "@/domain/OneTicket";
-import { getMyProjects, getMyTickets } from "@/utils/web3/web3_v2";
-import { useTicketProjectList } from "@/context/contractContext";
-import OneProjectThumb from "@/components/Project/home/OneProjectThumb";
-import TicketProjectCheck from "@/components/Project/home/TicketProjectCheck";
+'use client';
+import React, { useContext, useState, useEffect } from 'react';
+import { AppContext } from '../layout';
+import { OneProject } from '@/domain/OneProject';
+import { OneTicket } from '@/domain/OneTicket';
+import { getMyProjects, getMyTickets } from '@/utils/web3/web3_v2';
+import { useTicketProjectList } from '@/context/contractContext';
+import OneProjectThumb from '@/components/Project/home/OneProjectThumb';
+import TicketProjectCheck from '@/components/Project/home/TicketProjectCheck';
 
 export default function profile() {
   const { account } = useContext(AppContext);
