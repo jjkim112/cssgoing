@@ -1,39 +1,29 @@
-"use client";
-import { useContext } from "react";
-import { AppContext } from "@/app/layout";
+'use client';
+
 import {
   GOERLI_CHAIN_ID,
-  QUEST_NFT_ADDRESS,
   ethereum,
   questContract,
   web3,
   ticketContract,
-} from "@/lib/web3.config";
-
-interface QuestContractProps {
-  tokenId: number[];
-  price: number[];
-  minCount: number[];
-  ticketNum: number;
-  uri: string;
-  name: string;
-  symbol: string;
-}
+} from '@/lib/web3.config';
 
 export const onClickLogin = async () => {
   try {
     const accounts = await ethereum?.request({
-      method: "eth_requestAccounts",
+      method: 'eth_requestAccounts',
     });
+
+    if (typeof ethereum?.networkVersion !== 'string') return;
 
     if (parseInt(ethereum?.networkVersion) !== GOERLI_CHAIN_ID) {
       await ethereum?.request({
-        method: "wallet_switchEthereumChain",
+        method: 'wallet_switchEthereumChain',
         params: [{ chainId: web3.utils.toHex(GOERLI_CHAIN_ID) }],
       });
     }
 
-    return accounts[0];
+    return accounts ?? [0];
   } catch (error) {
     console.error(error);
   }
@@ -115,7 +105,7 @@ export const ticketBuying = async (
       .ticketTransfer(t_addr, tokenId)
       .send({
         from: account,
-        value: web3.utils.toWei(price, "wei"),
+        value: web3.utils.toWei(price, 'wei'),
         //여기 10에 들어간 자리는 아래 내가 수동으로 프라이스 리스트 넣을때 1번토큰을 10wei로 했기때문이다
       });
     console.log(response);
@@ -179,7 +169,10 @@ export const getWholeTicketNum = async (t_addr: string) => {
     const response = await ticketContract(t_addr)
       .methods.getAllTokenIdsNumber()
       .call();
-    return { whole: Number(response["0"]), remain: Number(response["1"]) };
+    return {
+      whole: Number(response ?? ['0']),
+      remain: Number(response ?? ['1']),
+    };
   } catch (error) {
     console.error(error);
     return { whole: null, remain: null };
@@ -230,17 +223,17 @@ export const transactionTracking = async (
       tokenId: targetTokenId,
     },
     fromBlock: 0,
-    toBlock: "latest",
+    toBlock: 'latest',
   };
 
   try {
     const events = await ticketContract(t_addr).getPastEvents(
-      "Transfer",
+      'Transfer',
       options
     );
 
     for (const event of events) {
-      const { from, to, tokenId } = event.returnValues;
+      const { to, tokenId } = event.returnValues;
 
       if (tokenId == targetTokenId) {
         transferCount++;
