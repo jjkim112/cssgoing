@@ -1,9 +1,9 @@
-"use client";
-import React, { useState, useEffect } from "react";
-import "./ProjectThumbStyles.css";
-import Link from "next/link";
-import { OneTicket } from "@/domain/OneTicket";
-import { getWholeTicketNum } from "@/utils/web3/web3_v2";
+'use client';
+import React, { useState, useEffect } from 'react';
+import './ProjectThumbStyles.css';
+import Link from 'next/link';
+import { OneTicket } from '@/domain/OneTicket';
+import { getWholeTicketNum } from '@/utils/web3/web3_v2';
 
 interface OneProjectThumbProps {
   contract: string;
