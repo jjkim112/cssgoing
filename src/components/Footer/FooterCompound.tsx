@@ -1,7 +1,7 @@
-import React from 'react';
-import './FooterStyles.css';
-import FooterLink from './FooterLink';
-import Image from 'next/image';
+import React from "react";
+import "./FooterStyles.css";
+import FooterLink from "./FooterLink";
+import Image from "next/image";
 
 function FooterCompound() {
   return (
@@ -9,9 +9,9 @@ function FooterCompound() {
       <div className="footer-title">
         <Image
           className="logo"
-          src={`/images/logo.png`}
-          width={100}
-          height={50}
+          src={`/images/logo2.png`}
+          width={500}
+          height={100}
           alt=""
         />
         <div className="mt-3">
