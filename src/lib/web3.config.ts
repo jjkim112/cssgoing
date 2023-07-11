@@ -1,9 +1,14 @@
-import { MetaMaskSDK } from "@metamask/sdk";
-import Web3 from "web3";
-import QUEST_NFT_ABI from "@/lib/questContractAbi.json";
-import TICKET_NFT_ABI from "@/lib/ticketContractAbi.json";
+import { MetaMaskSDK } from '@metamask/sdk';
+import Web3 from 'web3';
+import QUEST_NFT_ABI from '@/lib/questContractAbi.json';
+import TICKET_NFT_ABI from '@/lib/ticketContractAbi.json';
 
-const MMSDK = new MetaMaskSDK();
+const MMSDK = new MetaMaskSDK({
+  dappMetadata: {
+    name: 'h662',
+    url: 'https://h662.com',
+  },
+});
 export const ethereum = MMSDK.getProvider();
 
 export const web3 = new Web3(ethereum);
