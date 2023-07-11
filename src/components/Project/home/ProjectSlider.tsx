@@ -1,10 +1,8 @@
-"use client";
-import React, { useState } from "react";
+'use client';
+import React, { useState } from 'react';
 // import projectMockData from "../../../mock-data/v0/projects.json";
-import projectMockData from "../../../mock-data/v1/projects.json";
-import OneProjectThumb from "./OneProjectThumb";
-import { useTicketProjectList } from "@/context/contractContext";
-import { OneProject } from "@/domain/OneProject";
+import OneProjectThumb from './OneProjectThumb';
+import { useTicketProjectList } from '@/context/contractContext';
 
 interface tikectAvailable {
   available: boolean;
