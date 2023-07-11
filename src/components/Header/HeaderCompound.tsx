@@ -1,23 +1,13 @@
-"use client";
-import React, { FC, ReactNode, useEffect } from "react";
-import Link from "next/link";
-import "./HeaderStyles.css";
-import Image from "next/image";
-import { GOERLI_CHAIN_ID, ethereum, web3 } from "@/lib/web3.config";
-import { useContext } from "react";
-import { AppContext } from "@/app/layout";
-import useSWR from "swr";
-import { useTicketProjectList } from "@/context/contractContext";
-import { OneProject } from "@/domain/OneProject";
-import {
-  getMyProjects,
-  getMyTickets,
-  getTicketContractUri,
-  getWholeTicketContractList,
-  getWholeTicketList,
-  getWholeTicketNum,
-  onClickLogin,
-} from "@/utils/web3/web3_v2";
+'use client';
+import React, { FC, ReactNode, useEffect } from 'react';
+import Link from 'next/link';
+import './HeaderStyles.css';
+import Image from 'next/image';
+import { useContext } from 'react';
+import { AppContext } from '@/app/layout';
+import { useTicketProjectList } from '@/context/contractContext';
+import { OneProject } from '@/domain/OneProject';
+import { onClickLogin } from '@/utils/web3/web3_v2';
 interface HeaderProps {
   className?: string;
   children?: ReactNode;
@@ -34,46 +24,10 @@ const HeaderCustom: FC<HeaderProps> = () => {
     }
   };
 
-  const { updateProjects, updateTickets, getProject, projects } =
-    useTicketProjectList();
+  const { getProject, projects } = useTicketProjectList();
 
-  const testFunc1 = async () => {
-    const res = await getMyProjects(account);
-    console.log("getMyProjects");
-    console.log(res);
-  };
-
-  const testFunc2 = async () => {
-    const res = await getTicketContractUri(
-      "0xa77fe9Ce610137Ad382299eEb0528BAb55430128"
-    );
-    console.log("getTicketContractUri");
-    console.log(res);
-  };
-  const testFunc3 = async () => {
-    const res = await getMyTickets(
-      "0xa77fe9Ce610137Ad382299eEb0528BAb55430128",
-      account
-    );
-    console.log("getMyTickets");
-    console.log(res);
-  };
-  const testFunc4 = async () => {
-    const res = await getWholeTicketList(
-      "0xa77fe9Ce610137Ad382299eEb0528BAb55430128"
-    );
-    console.log("getWholeTicketList");
-    console.log(res);
-  };
-  const testFunc5 = async () => {
-    const res = await getWholeTicketNum(
-      "0xa77fe9Ce610137Ad382299eEb0528BAb55430128"
-    );
-    console.log("getWholeTicketNum");
-    console.log(res);
-  };
   useEffect(() => {
-    const temp: OneProject | null = getProject("1234");
+    const temp: OneProject | null = getProject('1234');
     console.log(temp);
   }, [projects]);
 

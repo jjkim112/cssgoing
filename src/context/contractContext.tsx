@@ -1,11 +1,8 @@
-import { OneProject } from "@/domain/OneProject";
-import axios from "axios";
-import { createContext, useState, useContext, ReactNode } from "react";
-import { HexString16Bytes } from "web3";
-
-import mockdata from "../mock-data/v2/projects.json";
-import { OneTicket } from "@/domain/OneTicket";
-import { getTicketContractUri, getWholeTicketList } from "@/utils/web3/web3_v2";
+import { OneProject } from '@/domain/OneProject';
+import axios from 'axios';
+import { createContext, useState, useContext, ReactNode } from 'react';
+import { OneTicket } from '@/domain/OneTicket';
+import { getTicketContractUri, getWholeTicketList } from '@/utils/web3/web3_v2';
 
 interface TicketProjectListContextType {
   projects: OneProject[];
@@ -20,7 +17,7 @@ const TicketProjectListContext = createContext<TicketProjectListContextType>({
   getProject: () => {
     return null;
   },
-  getTicket: () => {
+  getTicket: async () => {
     return null;
   },
   updateTickets: async () => {},
@@ -45,11 +42,11 @@ export default function TicketProjectListProvider({
     for (let index = 0; index < ticketAddresses.length; index++) {
       const t_addr: string = ticketAddresses[index];
       // todo ticketContract한테 1.json url 얻어오기
-      const metadataUrl = (await getTicketContractUri(t_addr)) ?? "";
+      const metadataUrl = (await getTicketContractUri(t_addr)) ?? '';
       // mockdata.find((v, _) => v.address === t_addr)?.metadataUrl ?? "";
 
-      if (metadataUrl !== "") {
-        const ticketUrl = metadataUrl + "/1.json";
+      if (metadataUrl !== '') {
+        const ticketUrl = metadataUrl + '/1.json';
         let jsonData = fromCache(ticketUrl);
         if (jsonData === undefined) {
           jsonData = await axios.get(ticketUrl);
@@ -74,7 +71,7 @@ export default function TicketProjectListProvider({
         tempProjects.push(OneProject.fromWebData(jsonData, t_addr));
       }
     }
-    console.log("update projects part");
+    console.log('update projects part');
     console.log(tempProjects);
     setProjects(tempProjects);
   };
@@ -93,21 +90,21 @@ export default function TicketProjectListProvider({
     let ticketId = 0;
     let isSell = false;
     let isUse = false;
-    let url = "";
-    if (ticketStr.includes("_")) {
+    let url = '';
+    if (ticketStr.includes('_')) {
       // 1_sell -> [ 1, sell ]
       isSell = true;
-      ticketId = Number(ticketStr.split("_")[0]);
+      ticketId = Number(ticketStr.split('_')[0]);
 
-      if (ticketStr.split("_")[1] === "sell") {
-        url = metadataUrl + "/" + ticketId + ".json"; // 1.json
+      if (ticketStr.split('_')[1] === 'sell') {
+        url = metadataUrl + '/' + ticketId + '.json'; // 1.json
       } else {
         isUse = true;
-        url = metadataUrl + "/" + ticketStr + ".json"; // 1_use.json
+        url = metadataUrl + '/' + ticketStr + '.json'; // 1_use.json
       }
     } else {
       ticketId = Number(ticketStr);
-      url = metadataUrl + "/" + ticketStr + ".json";
+      url = metadataUrl + '/' + ticketStr + '.json';
     }
     return { ticketId, isSell, isUse, url };
   };
@@ -116,11 +113,11 @@ export default function TicketProjectListProvider({
     let tempTickets: OneTicket[] = [];
 
     const ticketIdStrs = (await getWholeTicketList(t_addr)) ?? [];
-    console.log("-------------updateTickets-------------");
-    console.log("ticketIdStrs : " + ticketIdStrs);
-    const metadataURL = (await getTicketContractUri(t_addr)) ?? "";
-    console.log("metadataURL : " + metadataURL);
-    if (metadataURL !== "") {
+    console.log('-------------updateTickets-------------');
+    console.log('ticketIdStrs : ' + ticketIdStrs);
+    const metadataURL = (await getTicketContractUri(t_addr)) ?? '';
+    console.log('metadataURL : ' + metadataURL);
+    if (typeof metadataURL === 'string') {
       for (let index = 0; index < ticketIdStrs.length; index++) {
         const ticketIdStr = ticketIdStrs[index];
         // 1 , 1_sell , 1_use
@@ -141,7 +138,7 @@ export default function TicketProjectListProvider({
         );
       }
     }
-    console.log("tempTickets : " + tempTickets);
+    console.log('tempTickets : ' + tempTickets);
     // tempTickets에 티켓이 전부 업데이트 되어 있는 상황
 
     // shallow copy 얕은 복사.
@@ -169,8 +166,8 @@ export default function TicketProjectListProvider({
     });
   };
   const getTicket = async (t_addr: string, ticketIdStr: string) => {
-    const metadataURL = (await getTicketContractUri(t_addr)) ?? "";
-    if (metadataURL !== "") {
+    const metadataURL = (await getTicketContractUri(t_addr)) ?? '';
+    if (typeof metadataURL === 'string') {
       const { ticketId, isSell, isUse, url } = fromTicketData(
         ticketIdStr,
         metadataURL
