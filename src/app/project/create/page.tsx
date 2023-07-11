@@ -5,7 +5,6 @@ import TitleWithInput from '@/components/Project/create/TitleWithInput';
 
 import axios from 'axios';
 import { useState, useRef, useContext } from 'react';
-import FormData from 'form-data';
 import { redirect } from 'next/navigation';
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
@@ -304,7 +303,7 @@ const ProjectCreatePage = () => {
         form,
         {
           headers: {
-            'Content-Type': `multipart/form-data; boundary=${form._boundary}`,
+            'Content-Type': `multipart/form-data`,
             Authorization: `Bearer ${pinataJwt}`,
           },
         }
