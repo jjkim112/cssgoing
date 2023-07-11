@@ -303,7 +303,6 @@ const ProjectCreatePage = () => {
         'https://api.pinata.cloud/pinning/pinFileToIPFS',
         form,
         {
-          maxBodyLength: 'Infinity',
           headers: {
             'Content-Type': `multipart/form-data; boundary=${form._boundary}`,
             Authorization: `Bearer ${pinataJwt}`,
