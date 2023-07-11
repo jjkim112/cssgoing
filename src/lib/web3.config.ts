@@ -5,7 +5,7 @@ import TICKET_NFT_ABI from '@/lib/ticketContractAbi.json';
 
 const MMSDK = new MetaMaskSDK({
   dappMetadata: {
-    name: 'h662',
+    name: 'reRaise',
     url: 'https://h662.com',
   },
 });
