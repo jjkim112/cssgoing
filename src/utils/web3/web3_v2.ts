@@ -22,8 +22,8 @@ export const onClickLogin = async () => {
         params: [{ chainId: web3.utils.toHex(GOERLI_CHAIN_ID) }],
       });
     }
-
-    return accounts ?? [0];
+    //  @ts-expect-error
+    return accounts[0];
   } catch (error) {
     console.error(error);
   }
@@ -176,8 +176,9 @@ export const getWholeTicketNum = async (t_addr: string) => {
       .methods.getAllTokenIdsNumber()
       .call();
     return {
-      whole: Number(response ?? ['0']),
-      remain: Number(response ?? ['1']),
+      //  @ts-expect-error
+      whole: Number(response['0']), //  @ts-expect-error
+      remain: Number(response['1']),
     };
   } catch (error) {
     console.error(error);
