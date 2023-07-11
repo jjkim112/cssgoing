@@ -33,6 +33,7 @@ export const onClickLogin = async () => {
 
 export const attendance = async (t_addr: string, account: string) => {
   try {
+    //  @ts-expect-error
     const response = await questContract.methods.attendance(t_addr).send({
       from: account,
     });
@@ -45,7 +46,7 @@ export const attendance = async (t_addr: string, account: string) => {
 
 export const attendancePointCheck = async (t_addr: string, account: string) => {
   try {
-    const response = await questContract.methods
+    const response = await questContract.methods //  @ts-expect-error
       .attendancePointCheck(t_addr)
       .call({
         from: account,
@@ -59,7 +60,10 @@ export const attendancePointCheck = async (t_addr: string, account: string) => {
 
 export const ownerOfTokenId = async (t_addr: string, id: number) => {
   try {
-    const response = await ticketContract(t_addr).methods.ownerOf(id).call();
+    const response = await ticketContract(t_addr)
+      .methods //  @ts-expect-error
+      .ownerOf(id)
+      .call();
     return response;
   } catch (error) {
     console.error(error);
@@ -71,9 +75,11 @@ export const getMyLastTimeOfAttendance = async (
   account: string
 ) => {
   try {
-    const response = await questContract.methods.lastCheckedTime(t_addr).call({
-      from: account,
-    });
+    const response = await questContract.methods //  @ts-expect-error
+      .lastCheckedTime(t_addr)
+      .call({
+        from: account,
+      });
     return Number(response);
   } catch (error) {
     console.error(error);
@@ -101,7 +107,7 @@ export const ticketBuying = async (
   account: string
 ) => {
   try {
-    const response = await questContract.methods
+    const response = await questContract.methods //  @ts-expect-error
       .ticketTransfer(t_addr, tokenId)
       .send({
         from: account,
@@ -192,6 +198,7 @@ export const makeTicketContract = async (
   try {
     const response = await questContract.methods
       .makeTicketContract(
+        //  @ts-expect-error
         tokenIds,
         prices,
         minCounts,
@@ -228,11 +235,13 @@ export const transactionTracking = async (
 
   try {
     const events = await ticketContract(t_addr).getPastEvents(
+      //  @ts-expect-error
       'Transfer',
       options
     );
 
     for (const event of events) {
+      //  @ts-expect-error
       const { to, tokenId } = event.returnValues;
 
       if (tokenId == targetTokenId) {
@@ -262,7 +271,7 @@ export const processTicketUsing = async (
   tokenId: number
 ) => {
   try {
-    const response = await ticketContract(t_addr)
+    const response = await ticketContract(t_addr) //  @ts-expect-error
       .methods.ticketUsed(tokenId)
       .send({
         from: account,
