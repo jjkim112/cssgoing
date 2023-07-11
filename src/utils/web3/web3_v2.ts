@@ -14,8 +14,7 @@ export const onClickLogin = async () => {
       method: 'eth_requestAccounts',
     });
 
-    if (typeof ethereum?.networkVersion !== 'string') return;
-
+    //  @ts-expect-error
     if (parseInt(ethereum?.networkVersion) !== GOERLI_CHAIN_ID) {
       await ethereum?.request({
         method: 'wallet_switchEthereumChain',

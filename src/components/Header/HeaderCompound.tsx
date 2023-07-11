@@ -20,7 +20,7 @@ const HeaderCustom: FC<HeaderProps> = () => {
     const walletAddr = await onClickLogin();
 
     if (walletAddr !== null || walletAddr !== undefined) {
-      setAccount(walletAddr[0] ?? '');
+      setAccount(walletAddr[0]);
     }
   };
 
