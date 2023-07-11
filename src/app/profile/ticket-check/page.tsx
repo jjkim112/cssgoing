@@ -1,14 +1,16 @@
 'use client';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useContext } from 'react';
 
 // import projectMockData from "@/mock-data/v0/projects.json";
-import { useSearchParams } from 'next/navigation';
+import { redirect, useSearchParams } from 'next/navigation';
 import OneTicketCheckPart from '@/components/Project/main/OneTicketCheckPart';
 import { OneProject } from '@/domain/OneProject';
 import { OneTicket } from '@/domain/OneTicket';
 import { useTicketProjectList } from '@/context/contractContext';
+import { AppContext } from '@/app/layout';
 
 export default function TicketCheck() {
+  const { account } = useContext(AppContext);
   const params = useSearchParams();
   const ticketIdStr = params.get('id') ?? '';
   const t_addr = params.get('contract') ?? '';
@@ -30,7 +32,9 @@ export default function TicketCheck() {
   useEffect(() => {
     initSet();
   }, []);
-
+  if (!account) {
+    return redirect('/');
+  }
   return (
     <div className="bg-white">
       {ticketIdStr !== null &&
