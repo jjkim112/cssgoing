@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 body {
-  background-image: url("../../public/images/inner_background_v3.png");
+  background-image: url("../../public/images/backgroundImage2.png");
   background-repeat: no-repeat;
   background-size: cover;
 }
@@ -45,7 +45,7 @@ body {
   font-weight: 500;
   font-size: 36px;
   line-height: 45px;
-  color: rgb(0, 0, 0);
+  color: rgb(255, 255, 255);
   padding-top: 20px;
   padding-left: 10px;
 }

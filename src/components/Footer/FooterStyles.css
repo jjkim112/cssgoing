@@ -1,7 +1,7 @@
 /* ############### Footer Section ############### */
 
 .footer-wrapper {
-  background-color: blue;
+  /* background-color: blue; */
   max-width: 1240px;
   margin: auto;
   padding: 10px 10px;
@@ -9,7 +9,7 @@
 
 .footer-title {
   font-size: 16px;
-  color: #757575;
+  color: #ffffff;
   margin-bottom: 20px;
 }
 
@@ -37,18 +37,23 @@
 }
 
 .footer-link {
-  color: #757575;
+  color: #ffffff;
   margin-bottom: 20px;
   font-size: 13px;
 }
 
 .footer-link-title {
   font-size: 18px;
-  color: black;
+  color: rgb(255, 255, 255);
   margin-bottom: 20px;
 }
 
 .footer-link:hover {
   font-weight: bold;
   color: black;
+}
+
+.logo {
+  width: 150px;
+  height: 40px;
 }

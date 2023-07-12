@@ -22,7 +22,7 @@ const Home: NextPage = () => {
     <div className="w-full flex justify-center">
       <div className="inner  ">
         <div className="moreInner">
-          <div className="main_contentTitle">현재 티켓 현황</div>
+          <div className="main_contentTitle">Now on!</div>
           <ProjectThumbCompount />
         </div>
       </div>

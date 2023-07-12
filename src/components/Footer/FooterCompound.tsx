@@ -10,8 +10,8 @@ function FooterCompound() {
         <Image
           className="logo"
           src={`/images/logo2.png`}
-          width={500}
-          height={100}
+          width={300}
+          height={60}
           alt=""
         />
         <div className="mt-3">

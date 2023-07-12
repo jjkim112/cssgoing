@@ -92,6 +92,8 @@
   display: -webkit-box;
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
+  color: white;
+  font-size: x-large;
 }
 
 .thumb-card-description {
@@ -104,6 +106,7 @@
   -webkit-line-clamp: 3;
   overflow: hidden;
   text-overflow: ellipsis;
+  color: white;
 }
 
 /* .thumb-card-quest {

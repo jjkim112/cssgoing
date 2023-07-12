@@ -39,7 +39,7 @@ const HeaderCustom: FC<HeaderProps> = () => {
         <div className="flex justify-around w-full pl-4">
           <Link href="/">
             <Image
-              className="logo"
+              className="logoHeader"
               src={`/images/logo2.png`}
               width={500}
               height={50}
@@ -48,11 +48,11 @@ const HeaderCustom: FC<HeaderProps> = () => {
           </Link>
           <nav className="navbar-home ">
             <Link href="/project">
-              <div className="header-menu-item">프로젝트</div>
+              <div className="header-menu-item">project</div>
             </Link>
             {account ? (
               <Link href="/profile">
-                <div className="header-menu-item">프로필</div>
+                <div className="header-menu-item">profile</div>
               </Link>
             ) : (
               <>
@@ -62,7 +62,7 @@ const HeaderCustom: FC<HeaderProps> = () => {
                     setOpenDialog(true);
                   }}
                 >
-                  프로필
+                  profile
                 </button>
                 <LoginDialog
                   title="프로필 페이지는"

@@ -42,14 +42,14 @@ function OneProjectThumb({
             <img className="thumb-card-img" src={imgUrl} alt="" />
           </div>
           <div className=" p-3">
-            <div className="thumb-card-title pb-2  ">{title}</div>
+            <div className="thumb-card-title pb-2 ">{title}</div>
             <div className="thumb-card-description">{description}</div>
           </div>
           <div className="flex justify-between">
-            <div className="text-black text-2xl font-medium p-4">
+            <div className="text-white text-2xl font-medium p-4">
               총 티켓 : {totalTicketNum}
             </div>
-            <div className="text-black text-2xl font-medium p-4">
+            <div className="text-white text-2xl font-medium p-4">
               남은 티켓 : {remainTicketNum}
             </div>
           </div>
